@@ -1,18 +1,18 @@
 /* colorful-styles.css */
 body {
     font-family: 'Verdana', sans-serif;
-    background-color: #300236;
-    color: #000000;
+    background-color: #000000b7;
+    color: #ffffff;
     margin: 0;
     padding: 20px;
 }
 
 h1 {
-    color: #ff6f61;
+    color: #61daff;
 }
 
 h2 {
-    color: #6b5b95;
+    color: #fbff00;
 }
 
 p {
