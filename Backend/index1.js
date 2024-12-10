@@ -12,8 +12,8 @@ let movies = [
     {
         "id": 1,
         "name": "Lord of the Rings",
-        "producer": "J.R.R. Tolkien",
-        "year": "1954",
+        "producer": "Peter Jackson",
+        "year": "2001",
         "category": "Fantasy"
     },
     {
@@ -112,17 +112,18 @@ app.delete('/deletemovie', (request, response) => {
 app.delete('/deletemovie/:id', (request, response) => {
         let id = request.params.id;
         
-        let movie = "";
+        movies.new=[];
+        
 
 
 
         movies.forEach(element => {
-            if(element.id ==id){
-                movies.pop(element); //nije dobro riješenje, pravo riješenje nepoznato
+            if(element.id !=id){
+                movie_new.push(element); //nije dobro riješenje, pravo riješenje nepoznato
             }            
         });
 
-        return response.send('Deleting Movie with ID: '+id+ "New movie list" + JSON.stringify(movies));
+        return response.send('Deleting Movie with ID: '+id+ "New movie list" + JSON.stringify(movie_new));
         });
 
 app.listen(1000, () => {
