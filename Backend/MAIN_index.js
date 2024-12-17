@@ -75,7 +75,7 @@ app.post("/api/reser", (request, response) => {
     const data=request.body;
     registration=[[data.name, data.surname, data.username, data.password]]
 
-    connection.query("SELECT * FROM users WHERE username = ?", [data.username], (error, results) => {
+    connection.query("SELECT * FROM Users WHERE username = ?", [data.username], (error, results) => {
       if (error) throw error;
 
       if (results.length>0){

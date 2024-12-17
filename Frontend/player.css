@@ -52,6 +52,8 @@ table {
     color: #ffffff; /* Text color */
     border-radius: 8px; /* Rounded corners */
     overflow: hidden; /* Hide overflow */
+
+
 }
 
 th, td {

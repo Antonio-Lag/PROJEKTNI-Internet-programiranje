@@ -3,51 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registration</title>
     <link rel="stylesheet" href="style_log_reg.css">
-
-    <script>
-        function Date_print(){
-            const date = new Date();
-            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-            const formattedDate = date.toLocaleDateString('en-GB', options);
-          
-            document.getElementById("current-date").innerHTML = formattedDate; 
-        }
-        
-        function provjeriUnos(){
-            console.log(document.getElementById("name").value);
-            console.log(document.getElementById("surname").value);
-            console.log(document.getElementById("userid").value);
-            console.log(document.getElementById("password").value);
-            console.log(document.getElementById("passwordcheck").value);
-
-            if (document.getElementById("name").value == "" || 
-                document.getElementById("surname").value == "" || 
-                document.getElementById("userid").value == "" || 
-                document.getElementById("password").value == "" || 
-                document.getElementById("passwordcheck").value == "") {
-                document.getElementById("data").innerHTML = "Please check your registration information!";
-            } 
-            if (document.getElementById("name").value == "") 
-                document.getElementById("name").style.backgroundColor = "red";
-            if (document.getElementById("surname").value == "") 
-                document.getElementById("surname").style.backgroundColor = "red";
-            if (document.getElementById("userid").value == "") 
-                document.getElementById("userid").style.backgroundColor = "red";
-            if (document.getElementById("password").value == "") 
-                document.getElementById("password").style.backgroundColor = "#FF494F";
-            if (document.getElementById("passwordcheck").value == "") 
-                document.getElementById("passwordcheck").style.backgroundColor = "#FF494F";
-             else {alert('Registration successful')}
-        }
-
-       
-        window.onload = function() {
-            Date_print(); 
-        };
-    </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
     <nav>
@@ -55,41 +13,111 @@
         <a href="Home.html">Home page</a>
     </nav>
     <div class="w3-container w3-cyan">
-        <h1>Virtual movie shop</h1> 
+        <h1>Virtual Movie Shop</h1> 
     </div>
-    
-    <div class="w3-container w3-blue">
-        Register your account:
+
+    <div class="w3-container centered">
+        Register your account
     </div>
-    <div class="w3-container">
+
+    <div id="app" class="w3-container">
+        
+
         <label class="w3-text-blue">Name:</label>
-        <input type="text" name="name" id="name" class="w3-input w3-border" onfocus>
+        <input type="text" v-model="name" class="w3-input w3-border">
 
         <label class="w3-text-blue">Last Name:</label>
-        <input type="text" name="surname" id="surname" class="w3-input w3-border">
+        <input type="text" v-model="surname" class="w3-input w3-border">
 
         <label class="w3-text-blue">User  Name:</label>
-        <input type="text" name="userid" id="userid" class="w3-input w3-border">
+        <input type="text" v-model="username" class="w3-input w3-border">
 
         <label class="w3-text-blue">Password:</label>
-        <input type="password" name="password" id="password" class="w3-input w3-border">
+        <input type="password" v-model="password" class="w3-input w3-border">
 
         <label class="w3-text-blue">Confirm Password:</label>
-        <input type="password" name="passwordcheck" id="passwordcheck" class="w3-input w3-border">
+        <input type="password" v-model="passwordcheck" class="w3-input w3-border">
         <br>
         <br>
-        <button class="w3-btn w3-blue" onclick="provjeriUnos()">Register</button>
+        <button class="w3-btn w3-blue" @click="register">Register</button>
+        <div id="data">{{ message }}</div>
     </div>
 
-
-    <div id="data"></div>
     <div class="w3-container w3-cyan">
         <footer>Telematika 2024/25 | <span id="current-date"></span></footer>
     </div>
 
     <script>
-        Date_print();
-    </script>
+        new Vue({
+            el: '#app',
+            data: {
+                name: '',
+                surname: '',
+                username: '',
+                password: '',
+                passwordcheck: '',
+                message: ''
+            },
+            methods: {
+                register() {
+                    if (this.name === '' || this.surname === '' || this.username === '' || this.password === '' || this.passwordcheck === '') {
+                        this.message = "Please check your registration information!";
+                        return;
+                    }
 
+                    if (this.password !== this.passwordcheck) {
+                        this.message = "Passwords do not match!";
+                        return;
+                    }
+
+                    const userData = {
+                        name: this.name,
+                        surname: this.surname,
+                        username: this.username,
+                        password: this.password
+                    };
+
+                    fetch('http://localhost:3001/api/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(err => { throw new Error(err.message); });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        this.message = "Registration successful!";
+                        this.resetForm();
+                    })
+                    .catch(error => {
+                        this.message = error.message || "Registration failed!";
+                    });
+                },
+                resetForm() {
+                    this.name = '';
+                    this.surname = '';
+                    this.username = '';
+                    this.password = '';
+                    this.passwordcheck = '';
+                }
+            }
+        });
+
+        function Date_print(){
+            const date = new Date();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-GB', options);
+            document.getElementById("current-date").innerHTML = formattedDate; 
+        }
+        
+        window.onload = function() {
+            Date_print(); 
+        };
+    </script>
 </body>
 </html>

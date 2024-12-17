@@ -46,6 +46,17 @@ h1 {
     padding: 20px; /* Padding inside the container */
     margin: 20px 0; /* Space above and below the container */
 }
+.centered {
+    background: #ffffff; /* White background for containers */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding inside the container */
+    margin: 20px 0; /* Space above and below the container */
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center horizontally */
+}
+
+
 
 /* Label styles */
 label {
