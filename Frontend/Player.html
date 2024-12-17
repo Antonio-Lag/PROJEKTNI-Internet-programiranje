@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+        }
+
+        iframe {
+            width: 80%; /* Adjust width as needed */
+            max-width: 1280px; /* Maximum width */
+            height: 720px; /* Set height */
+        }
+    </style>
+</head>
+<body>
+    <h1>Video Player</h1>
+    
+    <!-- YouTube video embedded using iframe -->
+    <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+
+    <br>
+    <a href="Home.html">Back to Home</a>
+
+    <script>
+        // Function to get query parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Get the YouTube video ID from the URL
+        const videoId = getQueryParam('video');
+        if (videoId) {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = `https://www.youtube.com/embed/${videoId}`; // Set the YouTube embed URL
+        } else {
+            alert("No video specified!");
+        }
+    </script>
+</body>
+</html>
