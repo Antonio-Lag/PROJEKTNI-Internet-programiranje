@@ -9,13 +9,15 @@
 
     <script>
         function noviTekst(){
-            const tekst ="Register";
+            const date = new Date();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-GB', options); // Format as DD.MM.YYYY
+            const headerText = `Virtual movie shop - ${formattedDate}`;
             const elems = document.getElementsByTagName("h1");
             const elem = elems[0];
-            //alert(elem);
-            console.log(elems);
-            elem.innerHTML = tekst;
+            elem.innerHTML = headerText; // Set the header text to include the date
         }
+        
         function provjeriUnos(){
             console.log(document.getElementById("name").value);
             console.log(document.getElementById("surname").value);
@@ -23,40 +25,42 @@
             console.log(document.getElementById("password").value);
             console.log(document.getElementById("passwordcheck").value);
 
-            // ukoliko nisu sva polja ispunjena, izbaci upozorenje
-
-            if (document.getElementById("name").value =="" || document.getElementById("surname").value =="" || document.getElementById("userid").value =="" || document.getElementById("password").value =="" || document.getElementById("passwordcheck")=="") {
+            if (document.getElementById("name").value == "" || 
+                document.getElementById("surname").value == "" || 
+                document.getElementById("userid").value == "" || 
+                document.getElementById("password").value == "" || 
+                document.getElementById("passwordcheck").value == "") {
                 document.getElementById("data").innerHTML = "Please check your registry information!";
             } 
-            if (document.getElementById("name").value =="") 
-                document.getElementById("name").style.backgroundColor="red";
-            if (document.getElementById("surname").value =="") 
-                document.getElementById("surname").style.backgroundColor="red";
-            if (document.getElementById("userid").value =="") 
-                document.getElementById("userid").style.backgroundColor="red";
-            if (document.getElementById("password").value =="") 
-                document.getElementById("password").style.backgroundColor="#FF494F";
-            if (document.getElementById("passwordcheck").value =="") 
-                document.getElementById("passwordcheck").style.backgroundColor="#FF494F";
-
-
+            if (document.getElementById("name").value == "") 
+                document.getElementById("name").style.backgroundColor = "red";
+            if (document.getElementById("surname").value == "") 
+                document.getElementById("surname").style.backgroundColor = "red";
+            if (document.getElementById("userid").value == "") 
+                document.getElementById("userid").style.backgroundColor = "red";
+            if (document.getElementById("password").value == "") 
+                document.getElementById("password").style.backgroundColor = "#FF494F";
+            if (document.getElementById("passwordcheck").value == "") 
+                document.getElementById("passwordcheck").style.backgroundColor = "#FF494F";
         }
 
-
+        // Call the noviTekst function when the page loads
+        window.onload = function() {
+            noviTekst(); // Call noviTekst to set the header text with the date
+        };
     </script>
 
 </head>
 <body>
     <nav>
         <a href="Login.html">Login</a>
-        <a href="Home.html">Home</a>
-
+        <a href="Home.html">Home page</a>
     </nav>
     <div class="w3-container w3-cyan">
-        <h1>Virtual movie shop</h1>
+        <h1>Virtual movie shop</h1> <!-- This will now include the date -->
     </div>
     
-    <div class="datum"> 05.11.2024</div>
+    <div class="datum"></div> <!-- You can remove this if you don't need a separate date display -->
     <div class="w3-container w3-blue">
         Register your account:
     </div>
@@ -67,7 +71,7 @@
         <label class="w3-text-blue">Last Name:</label>
         <input type="text" name="surname" id="surname" class="w3-input w3-border">
 
-        <label class="w3-text-blue">Username:</label>
+        <label class="w3-text-blue">User  Name:</label>
         <input type="text" name="userid" id="userid" class="w3-input w3-border">
 
         <label class="w3-text-blue">Password:</label>
@@ -76,10 +80,7 @@
         <label class="w3-text-blue">Confirm Password:</label>
         <input type="password" name="passwordcheck" id="passwordcheck" class="w3-input w3-border">
 
-
-
         <button class="w3-btn w3-blue" onclick="provjeriUnos()">Register</button>
-        
     </div>
 
 
