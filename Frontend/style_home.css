@@ -65,6 +65,7 @@ nav a:hover {
     transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
     flex: 0 0 auto; /* Prevent flex items from shrinking */
     scroll-snap-align: start; /* Snap alignment for scrolling */
+
 }
 
 .movie-card:hover {
@@ -74,8 +75,10 @@ nav a:hover {
 
 /* Movie image styles */
 .movie-image {
-    width: 100%; /* Full width image */
+    width: 200px; /* Set a fixed width */
     height: auto; /* Maintain aspect ratio */
+    max-height: 300px; /* Set a maximum height */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
 }
 
 /* Movie title styles */
