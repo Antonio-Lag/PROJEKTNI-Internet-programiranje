@@ -1,0 +1,118 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Clean sans-serif font */
+    line-height: 1.6; /* Improve readability */
+    background-color: #f4f4f4; /* Light background color */
+    color: #333; /* Dark text color */
+    padding: 20px; /* Add some padding */
+}
+
+/* Navigation styles */
+nav {
+    background-color: #007bff; /* Primary color */
+    padding: 10px; /* Padding for nav */
+    text-align: center; /* Center the nav items */
+}
+
+nav a {
+    color: white; /* White text for links */
+    text-decoration: none; /* Remove underline */
+    margin: 0 15px; /* Space between links */
+    font-weight: bold; /* Bold text */
+}
+
+nav a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Header styles */
+h1 {
+    font-size: 2.5em; /* Large heading */
+    text-align: center; /* Center the heading */
+    margin: 20px 0; /* Space above and below */
+}
+
+/* Container styles */
+.w3-container {
+    background: #ffffff; /* White background for containers */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding inside the container */
+    margin: 20px 0; /* Space above and below the container */
+}
+
+/* Label styles */
+label {
+    display: block; /* Block display for labels */
+    margin: 10px 0 5px; /* Space above and below */
+    color: #007bff; /* Blue color for labels */
+}
+
+/* Input styles */
+input[type="text"],
+input[type="password"] {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff; /* Change border color on focus */
+}
+
+/* Button styles */
+button {
+    background: #007bff; /* Primary button color */
+    color: #fff; /* White text */
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    transition: background 0.3s; /* Smooth transition */
+    font-size: 1em; /* Font size */
+}
+
+button:hover {
+    background: #0056b3; /* Darker blue on hover */
+}
+
+/* Error message styles */
+#error-message {
+    color: #FF494F; /* Red color for error messages */
+    margin-top: 10px; /* Space above the error message */
+}
+
+/* Footer styles */
+footer {
+    text-align: center; /* Center the footer text */
+    padding: 10px 0; /* Padding for footer */
+    background-color: #007bff; /* Primary color */
+    color: white; /* White text */
+    position: relative; /* Positioning for footer */
+    bottom: 0; /* Stick to the bottom */
+    width: 100%; /* Full width */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Less padding on small screens */
+    }
+
+    h1 {
+        font-size: 2em; /* Smaller heading on small screens */
+    }
+
+    button {
+        width: 100%; /* Full width button on small screens */
+    }
+}
