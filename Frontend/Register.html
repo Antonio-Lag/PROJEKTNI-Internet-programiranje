@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--link rel="stylesheet" href="../css/style.css"-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script>
+        function noviTekst(){
+            const tekst ="Register";
+            const elems = document.getElementsByTagName("h1");
+            const elem = elems[0];
+            //alert(elem);
+            console.log(elems);
+            elem.innerHTML = tekst;
+        }
+        function provjeriUnos(){
+            console.log(document.getElementById("name").value);
+            console.log(document.getElementById("surname").value);
+            console.log(document.getElementById("userid").value);
+            console.log(document.getElementById("password").value);
+            console.log(document.getElementById("passwordcheck").value);
+
+            // ukoliko nisu sva polja ispunjena, izbaci upozorenje
+
+            if (document.getElementById("name").value =="" || document.getElementById("surname").value =="" || document.getElementById("userid").value =="" || document.getElementById("password").value =="" || document.getElementById("passwordcheck")=="") {
+                document.getElementById("data").innerHTML = "Please check your registry information!";
+            } 
+            if (document.getElementById("name").value =="") 
+                document.getElementById("name").style.backgroundColor="red";
+            if (document.getElementById("surname").value =="") 
+                document.getElementById("surname").style.backgroundColor="red";
+            if (document.getElementById("userid").value =="") 
+                document.getElementById("userid").style.backgroundColor="red";
+            if (document.getElementById("password").value =="") 
+                document.getElementById("password").style.backgroundColor="#FF494F";
+            if (document.getElementById("passwordcheck").value =="") 
+                document.getElementById("passwordcheck").style.backgroundColor="#FF494F";
+
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+    <nav>
+        <a href="Login.html">Login</a>
+        <a href="Home.html">Home</a>
+
+    </nav>
+    <div class="w3-container w3-cyan">
+        <h1>Virtual movie shop</h1>
+    </div>
+    
+    <div class="datum"> 05.11.2024</div>
+    <div class="w3-container w3-blue">
+        Register your account:
+    </div>
+    <div class="w3-container">
+        <label class="w3-text-blue">Name:</label>
+        <input type="text" name="name" id="name" class="w3-input w3-border" onfocus>
+
+        <label class="w3-text-blue">Last Name:</label>
+        <input type="text" name="surname" id="surname" class="w3-input w3-border">
+
+        <label class="w3-text-blue">Username:</label>
+        <input type="text" name="userid" id="userid" class="w3-input w3-border">
+
+        <label class="w3-text-blue">Password:</label>
+        <input type="password" name="password" id="password" class="w3-input w3-border">
+
+        <label class="w3-text-blue">Confirm Password:</label>
+        <input type="password" name="passwordcheck" id="passwordcheck" class="w3-input w3-border">
+
+
+
+        <button class="w3-btn w3-blue" onclick="provjeriUnos()">Register</button>
+        
+    </div>
+
+
+    <div id="data"></div>
+    <div class="w3-container w3-cyan">
+        <footer>Telematika 2024/25</footer>
+    </div>
+
+    <script>
+        noviTekst();
+    </script>
+
+</body>
+</html>
