@@ -3,73 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Thumbnails</title>
-    <link rel="stylesheet" href="style_home.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="style_log_reg.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
+    <nav>
+        <a href="Login.html">Login</a>
+        <a href="Home.html">Home page</a>
+    </nav>
+    <div class="w3-container w3-cyan">
+        <h1>Virtual movie shop</h1> 
+    </div>
+    
+    <div id="app" class="w3-container">
+        <div class="w3-container w3-blue">
+            Register your account:
+        </div>
+        <label class="w3-text-blue">Name:</label>
+        <input type="text" v-model="name" class="w3-input w3-border">
 
-    <h2>
-        <nav>
-            <a href="Login.html">Login</a>
-            <a href="Register.html">Register</a>
-        </nav>
-    </h2>
+        <label class="w3-text-blue">Last Name:</label>
+        <input type="text" v-model="surname" class="w3-input w3-border">
 
-    <h1>Movie Thumbnails</h1>
-    <div id="app" class="movie-grid">
-        <a v-for="movie in movies" :key="movie.ID" :href="'movie' + movie.ID + '.html'" class="movie-card">
-            <img :src="movie.image" :alt="movie.movie" class="movie-image">
-            <div class="movie-title">{{ movie.movie }}</div>
-            <div class="movie-details">
-                <p>Producer: {{ movie.producer }}</p>
-                <p>Year: {{ movie.year_mov }}</p>
-                <p>Category: {{ movie.category }}</p>
-            </div>
-        </a>
+        <label class="w3-text-blue">User  Name:</label>
+        <input type="text" v-model="userid" class="w3-input w3-border">
+
+        <label class="w3-text-blue">Password:</label>
+        <input type="password" v-model="password" class="w3-input w3-border">
+
+        <label class="w3-text-blue">Confirm Password:</label>
+        <input type="password" v-model="passwordcheck" class="w3-input w3-border">
+        <br>
+        <br>
+        <button class="w3-btn w3-blue" @click="register">Register</button>
+        <div id="data">{{ message }}</div>
     </div>
 
-    <h1>Series Thumbnails</h1>
-    <div class="series-grid">
-        <a v-for="series in seriesList" :key="series.id" :href="'series' + series.id + '.html'" class="movie-card">
-            <img :src="series.image" :alt="series.name" class="movie-image">
-            <div class="movie-title">{{ series.name }}</div>
-        </a>
+    <div class="w3-container w3-cyan">
+        <footer>Telematika 2024/25 | <span id="current-date"></span></footer>
     </div>
 
     <script>
         new Vue({
             el: '#app',
             data: {
-                movies: [],
-                seriesList: [] // Assuming you have a similar structure for series
-            },
-            mounted() {
-                this.fetchMovies();
-                this.fetchSeries(); // Fetch series data if available
+                name: '',
+                surname: '',
+                userid: '',
+                password: '',
+                passwordcheck: '',
+                message: ''
             },
             methods: {
-                fetchMovies() {
-                    fetch('http://localhost:3001/api/movie') // Update the URL to match your server
-                        .then(response => response.json())
-                        .then(data => {
-                            this.movies = data.map(movie => ({
-                                ID: movie.ID,
-                                movie: movie.movie,
-                                producer: movie.producer,
-                                year_mov: movie.year_mov,
-                                category: movie.category,
-                                image: `https://via.placeholder.com/200x300?text=${encodeURIComponent(movie.movie)}` // Placeholder image
-                            }));
-                        })
-                        .catch(error => console.error('Error fetching movies:', error));
+                register() {
+                    if (this.name === '' || this.surname === '' || this.userid === '' || this.password === '' || this.passwordcheck === '') {
+                        this.message = "Please check your registration information!";
+                        return;
+                    }
+
+                    if (this.password !== this.passwordcheck) {
+                        this.message = "Passwords do not match!";
+                        return;
+                    }
+
+                    // Here you would typically send the data to your server
+                    const userData = {
+                        name: this.name,
+                        surname: this.surname,
+                        userid: this.userid,
+                        password: this.password
+                    };
+
+                    // Example of sending data to a server using fetch
+                    fetch('YOUR_API_ENDPOINT', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        this.message = "Registration successful!";
+                        // Optionally reset the form
+                        this.resetForm();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        this.message = "Registration failed!";
+                    });
                 },
-                fetchSeries() {
-                    // Implement similar logic to fetch series data if available
+                resetForm() {
+                    this.name = '';
+                    this.surname = '';
+                    this.userid = '';
+                    this.password = '';
+                    this.passwordcheck = '';
                 }
             }
         });
-    </script>
 
+        function Date_print(){
+            const date = new Date();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-GB', options);
+            document.getElementById("current-date").innerHTML = formattedDate; 
+        }
+        
+        window.onload = function() {
+            Date_print(); 
+        };
+    </script>
 </body>
 </html>

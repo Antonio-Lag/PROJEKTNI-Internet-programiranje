@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const path = require("path");
+const { register } = require("module");
 
 const app = express();
 const port = 3001;
@@ -28,10 +29,10 @@ connection.connect(function(err) {
   });
 
 
-  app.use(express.static(path.join(__dirname, "..", "frontend")));
+  app.use(express.static(path.join(__dirname, "..",  "frontend")));
 
   app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "frontend", "home.html")); // Serve the HTML file
+    res.sendFile(path.join(__dirname, "..", "frontend", "testiranje.html")); // Serve the HTML file
 });
   
 app.get("/api/movie", (request, response) => {
@@ -60,7 +61,7 @@ app.post("/api/reser", (request, response) => {
     });
   });
 
-  app.post("/api/insert", (request, response) => {
+  app.post("/api/insert_movie", (request, response) => {
     const data = request.body;
     newmovie = [[data.movie, data.producer, data.godina, data.category]]
 
@@ -69,6 +70,28 @@ app.post("/api/reser", (request, response) => {
       response.send(results);
     });
   });
+
+  app.post("/api/register", (request,response)=> {
+    const data=request.body;
+    registration=[[data.name, data.surname, data.username, data.password]]
+
+    connection.query("SELECT * FROM users WHERE username = ?", [data.username], (error, results) => {
+      if (error) throw error;
+
+      if (results.length>0){
+        return response.status(400).json({message:'An account with that username already exists'});
+      }
+
+
+
+
+    
+    connection.query("INSERT INTO Users (name_sr, last_name, username, password) VALUES ?", [registration], (error, results) => {
+    if (error) throw error;
+    response.send(results);
+    });
+  });
+});
 
 
   app.listen(3001, () => {
