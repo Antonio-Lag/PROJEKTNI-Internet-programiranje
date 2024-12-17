@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    display: flex; /* Use flexbox for the body */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.movie-grid, .series-grid {
+    display: flex; /* Use flexbox for a row layout */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+    gap: 20px; /* Space between movie cards */
+    justify-content: center; /* Center the items in the flex container */
+    margin-bottom: 40px; /* Space between movie and series sections */
+    max-width: 100%; /* Ensure the grid does not exceed the width of the screen */
+}
+
+.movie-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    min-width: 200px; /* Set a minimum width for each card */
+}
+
+.movie-card:hover {
+    transform: scale(1.1);
+}
+
+.movie-image {
+    width: 100%;
+    height: auto;
+}
+
+.movie-title {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
