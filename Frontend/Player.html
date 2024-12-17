@@ -8,13 +8,19 @@
  
 </head>
 <body>
-    <h1>Video Player</h1>
-    <div>
+
+    
+        <br>
+            <h1>Video Player</h1>
+      
+    
+
     <!-- YouTube video embedded using iframe -->
     <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
-    </div>
+    
     <!-- Movie details table -->
-     <div>
+   
+    <div class="table">
     <table>
         <tr>
             <th>Producer</th>
@@ -54,7 +60,7 @@
             const videoPlayer = document.getElementById('videoPlayer');
             videoPlayer.src = `https://www.youtube.com/embed/${videoId}`; // Set the YouTube embed URL
         } else {
-            alert("No video specified!");
+           // alert("No video specified!");
         }
 
 

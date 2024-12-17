@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Thumbnails</title>
+    <link rel="stylesheet" href="style_home.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+
+    <h2>
+        <nav>
+            <a href="Login.html">Login</a>
+            <a href="Register.html">Register</a>
+        </nav>
+    </h2>
+
+    <h1>Movie Thumbnails</h1>
+    <div id="app" class="movie-grid">
+        <a v-for="movie in movies" :key="movie.id" :href="'movie' + movie.id + '.html'" class="movie-card">
+            <img :src="movie.image" :alt="movie.name" class="movie-image">
+            <div class="movie-title">{{ movie.name }}</div>
+        </a>
+    </div>
+
+    <h1>Series Thumbnails</h1>
+    <div class="series-grid">
+        <a v-for="series in seriesList" :key="series.id" :href="'series' + series.id + '.html'" class="movie-card">
+            <img :src="series.image" :alt="series.name" class="movie-image">
+            <div class="movie-title">{{ series.name }}</div>
+        </a>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                movies: [],
+                seriesList: [] // Assuming you have a similar structure for series
+            },
+            mounted() {
+                this.fetchMovies();
+                this.fetchSeries(); // Fetch series data if available
+            },
+            methods: {
+                fetchMovies() {
+                    fetch('/api/movie')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.movies = data.map(movie => ({
+                                id: movie.id,
+                                name: movie.name_mov,
+                                image: `https://via.placeholder.com/200x300?text=${encodeURIComponent(movie.name_mov)}`
+                            }));
+                        })
+                        .catch(error => console.error('Error fetching movies:', error));
+                },
+                fetchSeries() {
+                    // Implement similar logic to fetch series data if available
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
