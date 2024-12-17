@@ -20,6 +20,23 @@ h1 {
     color: #007bff; /* Primary color */
 }
 
+h2 {
+    font-size: 1em; /* Large heading */
+    text-align: right; /* Center the heading */
+    margin: 20px 0; /* Space above and below */
+}
+
+nav a {
+    color: white; /* White text for links */
+    text-decoration: none; /* Remove underline */
+    margin: 0 15px; /* Space between links */
+    font-weight: bold; /* Bold text */
+}
+
+nav a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
 /* Scrollable container styles */
 .movie-grid, .series-grid {
     display: flex; /* Use flexbox for horizontal layout */
