@@ -89,9 +89,11 @@
             if (cardRadio.checked) {
                 const cardNumber = document.querySelector('input[placeholder="Enter your card number"]').value;
                 alert('Your order has been charged to: ' + cardNumber);
+                alert('You may proceed with browsing other movies/series')
             } else if (paypalRadio.checked) {
                 const paypalEmail = document.querySelector('input[placeholder="Enter your PayPal email"]').value;
                 alert('Your order has been charged to: ' + paypalEmail);
+                alert('You may proceed with browsing other movies/series')
             }
         }
 

@@ -76,3 +76,14 @@ tr:hover {
     border-radius: 8px; /* Rounded corners */
     width: 80%; /* Width of the description */
 }
+
+button {
+    background: #007bff; /* Primary button color */
+    color: #fff; /* White text */
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    transition: background 0.3s; /* Smooth transition */
+    font-size: 1em; /* Font size */
+}

@@ -9,13 +9,16 @@
 
         // ukoliko nisu sva polja ispunjena, izbaci upozorenje
 
-        if (document.getElementById("username").value =="" || document.getElementById("password").value =="" ) {
-            document.getElementById("data").innerHTML = "Please check your login information!";
-        } 
+        
         if (document.getElementById("username").value =="") 
             document.getElementById("username").style.backgroundColor="red";
         if (document.getElementById("password").value =="") 
             document.getElementById("password").style.backgroundColor="#FF494F";
+
+            if (document.getElementById("username").value =="" || document.getElementById("password").value =="" ) {
+            document.getElementById("data").innerHTML = "Please check your login information!";
+        } 
+        else {alert('Login successful')}
 
 
     }
@@ -72,7 +75,6 @@
 
     <br>
     <br>
-
 
     <footer>Telematika 2024/25 | <span id="current-date"></span></footer>  
 

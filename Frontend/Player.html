@@ -5,37 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
     <link rel="stylesheet" href="playerc.css"> <!-- Link to the external CSS file -->
- 
 </head>
 <body>
-
-    
-        <br>
-            <h1>Video Player</h1>
-      
-    
+    <br>
+    <h1>Video Player</h1>
 
     <!-- YouTube video embedded using iframe -->
     <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
     
     <!-- Movie details table -->
-   
     <div class="table">
-    <table>
-        <tr>
-            <th>Producer</th>
-            <td>John Doe</td>
-        </tr>
-        <tr>
-            <th>Year of Production</th>
-            <td>2023</td>
-        </tr>
-        <tr>
-            <th>Genre</th>
-            <td>Action, Adventure</td>
-        </tr>
-    </table>
-</div>
+        <table>
+            <tr>
+                <th>Producer</th>
+                <td>John Doe</td>
+            </tr>
+            <tr>
+                <th>Year of Production</th>
+                <td>2023</td>
+            </tr>
+            <tr>
+                <th>Genre</th>
+                <td>Action, Adventure</td>
+            </tr>
+        </table>
+    </div>
+
     <!-- Movie description -->
     <div class="description">
         <h2>Movie Description</h2>
@@ -43,9 +38,21 @@
     </div>
 
     <br>
-    <a href="Home.html">Back to Home</a>
+    
+    <!-- Button to add item to checkout -->
+    <button id="addToCheckoutButton">Add to Checkout</button>
+    
+    <!-- Message display area -->
+    <div id="message" style="margin-top: 10px;"></div>
+
     <br>
-    <br>
+    <div>
+        <a href="Home.html">Back to Home</a>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
 
     <script>
         // Function to get query parameters
@@ -60,13 +67,13 @@
             const videoPlayer = document.getElementById('videoPlayer');
             videoPlayer.src = `https://www.youtube.com/embed/${videoId}`; // Set the YouTube embed URL
         } else {
-           // alert("No video specified!");
+            // alert("No video specified!");
         }
 
-
-
+        // Function to show success message
+        document.getElementById('addToCheckoutButton').addEventListener('click', function() {
+            document.getElementById('message').innerText = "Item successfully added to checkout, you may procceed back to HomePage";
+        });
     </script>
-
-
 </body>
 </html>
