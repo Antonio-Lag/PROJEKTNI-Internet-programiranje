@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="checkout.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+
+    <h1>Checkout</h1>
+
+    <div class="w3-container">
+        <h2>Selected Movies/Series</h2>
+        <table id="movieTable">
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>Movie 1</td>
+                <td>$4.99</td>
+                <td><button onclick="deleteMovie(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>Movie 2</td>
+                <td>$5.99</td>
+                <td><button onclick="deleteMovie(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>Movie 3</td>
+                <td>$3.99</td>
+                <td><button onclick="deleteMovie(this)">Delete</button></td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <h2>Payment Options</h2>
+        <table>
+            <tr>
+                <th>Payment Method</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" id="card" name="payment" value="card" checked>
+                    <label for="card">Card Number</label>
+                </td>
+                <td><input type="text" placeholder="Enter your card number"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" id="paypal" name="payment" value="paypal">
+                    <label for="paypal">PayPal</label>
+                </td>
+                <td><input type="text" placeholder="Enter your PayPal email" style="display:none;" id="paypalEmail"></td>
+            </tr>
+        </table>
+
+        <button type="button" onclick="submitPayment()">Rent</button>
+        <button type="button" onclick="window.location.href='Home.html'">Back to Home</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Movie Rental Service</p>
+    </footer>
+
+    <script>
+        // Show/hide PayPal email input based on selected payment method
+        const cardRadio = document.getElementById('card');
+        const paypalRadio = document.getElementById('paypal');
+        const paypalEmailInput = document.getElementById('paypalEmail');
+
+        cardRadio.addEventListener('change', function() {
+            if (this.checked) {
+                paypalEmailInput.style.display = 'none';
+            }
+        });
+
+        paypalRadio.addEventListener('change', function() {
+            if (this.checked) {
+                paypalEmailInput.style.display = 'block';
+            }
+        });
+
+        function submitPayment() {
+            // Here you can add your payment submission logic
+            if (cardRadio.checked) {
+                const cardNumber = document.querySelector('input[placeholder="Enter your card number"]').value;
+                alert('Your order has been charged to: ' + cardNumber);
+            } else if (paypalRadio.checked) {
+                const paypalEmail = document.querySelector('input[placeholder="Enter your PayPal email"]').value;
+                alert('Your order has been charged to: ' + paypalEmail);
+            }
+        }
+
+        function deleteMovie(button) {
+            // Remove the row of the clicked delete button
+            const row = button.parentNode.parentNode; // Get the row of the button
+            row.parentNode.removeChild(row); // Remove the row from the table
+        }
+    </script>
+</body>
+</html>

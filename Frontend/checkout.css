@@ -1,0 +1,94 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Clean sans-serif font */
+    line-height: 1.6; /* Improve readability */
+    background-color: #dfb9b996; /* Light background color */
+    color: #333; /* Dark text color */
+    padding: 20px; /* Add some padding */
+}
+
+/* Navigation styles */
+nav {
+    background-color: #007bff; /* Primary color */
+    padding: 10px; /* Padding for nav */
+    text-align: center; /* Center the nav items */
+}
+
+nav a {
+    color: white; /* White text for links */
+    text-decoration: none; /* Remove underline */
+    margin: 0 15px; /* Space between links */
+    font-weight: bold; /* Bold text */
+}
+
+nav a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Header styles */
+h1 {
+    font-size: 2.5em; /* Large heading */
+    text-align: center; /* Center the heading */
+    margin: 20px 0; /* Space above and below */
+}
+
+/* Container styles */
+.w3-container {
+    background: #ffffff; /* White background for containers */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding inside the container */
+    margin: 20px 0; /* Space above and below the container */
+}
+
+/* Table styles */
+table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Collapse borders */
+    margin-top: 20px; /* Space above the table */
+}
+
+th, td {
+    padding: 10px; /* Padding for table cells */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #ccc; /* Bottom border for rows */
+}
+
+th {
+    background-color: #007bff; /* Header background color */
+    color: #ffffff; /* Header text color */
+}
+
+/* Button styles */
+button {
+    background: #007bff; /* Primary button color */
+    color: #fff; /* White text */
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    transition: background 0.3s; /* Smooth transition */
+    font-size: 1em; /* Font size */
+    margin-top: 20px; /* Space above the button */
+}
+
+button:hover {
+    background: #0056b3; /* Darker blue on hover */
+}
+
+/* Footer styles */
+footer {
+    text-align: center; /* Center the footer text */
+    padding: 10px 0; /* Padding for footer */
+    background-color: #007bff; /* Primary color */
+    color: white; /* White text */
+    position: relative; /* Positioning for footer */
+    bottom: 0; /* Stick to the bottom */
+    width: 100%; /* Full width */
+}
