@@ -1,0 +1,79 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Clean sans-serif font */
+    background-color: #f0f0f0; /* Light background color */
+    color: #333; /* Dark text color */
+    padding: 20px; /* Add some padding */
+}
+
+/* Main heading styles */
+h1 {
+    text-align: center; /* Center the heading */
+    margin: 20px 0; /* Space above and below */
+    font-size: 2.5em; /* Large heading */
+    color: #007bff; /* Primary color */
+}
+
+/* Scrollable container styles */
+.movie-grid, .series-grid {
+    display: flex; /* Use flexbox for horizontal layout */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding: 10px 0; /* Padding for the container */
+    gap: 20px; /* Space between items */
+    scroll-snap-type: x mandatory; /* Enable snap scrolling */
+}
+
+.movie-grid::-webkit-scrollbar, .series-grid::-webkit-scrollbar {
+    height: 8px; /* Height of the scrollbar */
+}
+
+.movie-grid::-webkit-scrollbar-thumb, .series-grid::-webkit-scrollbar-thumb {
+    background: #007bff; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+}
+
+/* Movie card styles */
+.movie-card {
+    background: #fff; /* White background for cards */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Hide overflow */
+    text-decoration: none; /* Remove underline */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+    flex: 0 0 auto; /* Prevent flex items from shrinking */
+    scroll-snap-align: start; /* Snap alignment for scrolling */
+}
+
+.movie-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+/* Movie image styles */
+.movie-image {
+    width: 100%; /* Full width image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Movie title styles */
+.movie-title {
+    padding: 10px; /* Padding inside the card */
+    text-align: center; /* Center the text */
+    font-size: 1.1em; /* Font size for titles */
+    color: #333; /* Dark text color */
+    background-color: #f8f8f8; /* Light background for title */
+    border-top: 1px solid #e0e0e0; /* Top border */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em; /* Smaller heading on small screens */
+    }
+}
