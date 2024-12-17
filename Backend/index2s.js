@@ -44,9 +44,9 @@ app.get("/api/movie/:id", (request, response) => {
 
 app.post("/api/reser", (request, response) => {
     const data = request.body;
-    rezervacija = [[data.datum, data.id_movie, data.user]]
+    rezervacija = [[data.date, data.id_movie, data.user]]
 
-    connection.query("INSERT INTO Reservations (date_reservation, movie, username) VALUES ?", [rezervacija], (error, results) => {
+    connection.query("INSERT INTO Reservation (date_reservation, movie_id, username) VALUES ?", [rezervacija], (error, results) => {
       if (error) throw error;
       response.send(results);
     });

@@ -5,28 +5,39 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/hello', (request, response) => {
-return response.send('Hello world');
+app.get('/casopis', (request, response) => {
+return response.send('Unosite podatke casopisa');
 });
-app.post('/getkontakt', (request, response) => {
-    return response.send('GET metoda -> Read');
-});
-app.post('/addkontakt', (request, response) => {
+app.post('/addcasopis', (request, response) => {
     const data = request.body;
-    console.log(data.kontakt);
-    console.log(data.ime);
-    return response.send('POST metoda -> Add '+data.kontakt+" "+data.ime);
+    const id=data.id;
+    const naziv=sdata.naziv;
+    const opis=data.sadrzaj;
+
+    console.log(data.id);
+    console.log(data.naziv);
+    console.log(data.opis);
+    return response.send("Dodavanje Casopisa " +id+ " " +naziv+ " " +opis+ " ");
 });
-app.put('/updatekontakt', (request, response) => {
+
+app.put('/updatecasopis', (request, response) => {
+
     const data = request.body;
-    console.log(data.kontakt);
-    return response.send('PUT metoda -> Change '+data.kontakt);
+    const id=data.id;
+    const naziv=sdata.naziv;
+    const opis=data.sadrzaj;
+
+    console.log(data.id);
+    console.log(data.naziv);
+    console.log(data.opis);
+    return response.send("Azuriranje Casopisa " +id+ " " +naziv+ " " +opis+ " ");
+
 });
-app.delete('/deletekontakt', (request, response) => {
+app.delete('/deletecasopis', (request, response) => {
     const data = request.body;
-    console.log('Delete '+data.kontakt);
-    return response.send('Delete '+data.kontakt);
+    console.log('Delete '+data.id);
+    return response.send('Delete '+data.id);
 });
 app.listen(3000, () => {
-console.log("Server running on port 3000");
+console.log("Server  on port 3000");
 });
