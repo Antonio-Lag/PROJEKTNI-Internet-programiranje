@@ -1,5 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<script>
+    function noviTekst(){
+        const tekst ="Login";
+        const elems = document.getElementsByTagName("h1");
+        const elem = elems[0];
+        //alert(elem);
+        console.log(elems);
+        elem.innerHTML = tekst;
+    }
+    function provjeriUnos(){
+        console.log(document.getElementById("username").value);
+        console.log(document.getElementById("password").value);
+
+        // ukoliko nisu sva polja ispunjena, izbaci upozorenje
+
+        if (document.getElementById("username").value =="" || document.getElementById("password").value =="" ) {
+            document.getElementById("data").innerHTML = "Please check your login information!";
+        } 
+        if (document.getElementById("username").value =="") 
+            document.getElementById("username").style.backgroundColor="red";
+        if (document.getElementById("password").value =="") 
+            document.getElementById("password").style.backgroundColor="#FF494F";
+
+
+    }
+
+
+</script>
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +41,8 @@
 </head>
 <body>
     <nav>
-        <a href="Login.html">Login</a>
-        
+        <a href="Home.html">Homepage</a>
+        <a href="Register.html">Register</a>
 
     </nav>
 
@@ -23,32 +55,30 @@
         </div>
         
         <form class="w3-container">
-        
-        <label>Name</label>
+        <label>Username</label><br>
         <input class="w3-input" type="text">
         <br>
         <br>
-        <label>Last name</label>
-        <input class="w3-input" type="text">
-        <br>
-        <br>
-        <label>Username</label>
-        <input class="w3-input" type="text">
-        <br>
-        <br>
-        <label>Password</label>
+        <label>Password</label><br>
         <input class="w3-input" type="password">
         
         </form>
-        
+        <div id="data" style="color:red;"></div>
     </div>
+    <br>
+    <br>
+    <button class="w3-button w3-green" onclick="provjeriUnos()">Login</button>
 
-    <p><button class="w3-button w3-green">Login</button></p>
     <br>
     <br>
 
 
     <footer>Telematika 2024/25</footer>   
+
+    <script>
+        noviTekst();
+    </script>
+
 
 </body>
 </html>
