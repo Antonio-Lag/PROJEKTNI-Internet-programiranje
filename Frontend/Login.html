@@ -2,14 +2,7 @@
 <html lang="en">
 
 <script>
-    function noviTekst(){
-        const tekst ="Login";
-        const elems = document.getElementsByTagName("h1");
-        const elem = elems[0];
-        //alert(elem);
-        console.log(elems);
-        elem.innerHTML = tekst;
-    }
+
     function provjeriUnos(){
         console.log(document.getElementById("username").value);
         console.log(document.getElementById("password").value);
@@ -27,6 +20,16 @@
 
     }
 
+    function Date_print(){
+            const date = new Date();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-GB', options);
+          
+            document.getElementById("current-date").innerHTML = formattedDate; 
+        }
+        window.onload = function() {
+            Date_print(); 
+        };
 
 </script>
 
@@ -44,8 +47,8 @@
 
     </nav>
 
-    <h1>Virtual movie shop</h1>
-    <div class="datum"> 05.11.2024</div>
+
+    <h1>Login</h1>
     <div class="w3-card-4">
 
         <div class="w3-container w3-green">
@@ -71,11 +74,13 @@
     <br>
 
 
-    <footer>Telematika 2024/25</footer>   
+    <footer>Telematika 2024/25 | <span id="current-date"></span></footer>  
 
-    <script>
-        noviTekst();
+
+     <script>
+        Date_print();
     </script>
+
 
 
 </body>
