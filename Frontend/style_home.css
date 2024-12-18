@@ -57,7 +57,7 @@ nav a:hover {
 
 /* Movie card styles */
 .movie-card {
-    background: #fff; /* White background for cards */
+    background: #62006d9d; /* White background for cards */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     overflow: hidden; /* Hide overflow */
@@ -65,6 +65,7 @@ nav a:hover {
     transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
     flex: 0 0 auto; /* Prevent flex items from shrinking */
     scroll-snap-align: start; /* Snap alignment for scrolling */
+    width: 200px;
 
 }
 
@@ -76,8 +77,7 @@ nav a:hover {
 /* Movie image styles */
 .movie-image {
     width: 200px; /* Set a fixed width */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 300px; /* Set a maximum height */
+    height: 300px; /* Set a maximum height */
     object-fit: cover; /* Ensure the image covers the area without distortion */
 }
 
@@ -86,9 +86,13 @@ nav a:hover {
     padding: 10px; /* Padding inside the card */
     text-align: center; /* Center the text */
     font-size: 1.1em; /* Font size for titles */
-    color: #333; /* Dark text color */
-    background-color: #f8f8f8; /* Light background for title */
-    border-top: 1px solid #e0e0e0; /* Top border */
+    color: #ffffff; /* Dark text color */
+    background-color: #62006d9d; /* Light background for title */
+    border-top: 1px solid #62006d9d; /* Top border */
+    width: 100%; /* Ensure the title takes the full width of the card */
+    white-space: normal; /* Allow text to wrap to the next line */
+    overflow: hidden; /* Hide any overflow */
+    text-overflow: ellipsis; /* Optional: add ellipsis for overflowed text */
 }
 
 /* Responsive styles */
