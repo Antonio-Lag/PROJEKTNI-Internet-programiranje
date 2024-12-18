@@ -18,9 +18,14 @@
 
     <h1>Movie Thumbnails</h1>
     <div id="app" class="movie-grid">
-        <a v-for="movie in movies" :key="movie.id" :href="'movie' + movie.id + '.html'" class="movie-card">
-            <img :src="movie.image" :alt="movie.name" class="movie-image">
-            <div class="movie-title">{{ movie.name }}</div>
+        <a v-for="movie in movies" :key="movie.ID" :href="'movie' + movie.ID + '.html'" class="movie-card">
+            <img :src="movie.image" :alt="movie.movie" class="movie-image">
+            <div class="movie-title">{{ movie.movie }}</div>
+            <div class="movie-details">
+                <p>Producer: {{ movie.producer }}</p>
+                <p>Year: {{ movie.year_mov }}</p>
+                <p>Category: {{ movie.category }}</p>
+            </div>
         </a>
     </div>
 
@@ -45,13 +50,16 @@
             },
             methods: {
                 fetchMovies() {
-                    fetch('/api/movie')
+                    fetch('http://localhost:3001/api/movie') // Update the URL to match your server
                         .then(response => response.json())
                         .then(data => {
                             this.movies = data.map(movie => ({
-                                id: movie.id,
-                                name: movie.name_mov,
-                                image: `https://via.placeholder.com/200x300?text=${encodeURIComponent(movie.name_mov)}`
+                                ID: movie.ID,
+                                movie: movie.movie,
+                                producer: movie.producer,
+                                year_mov: movie.year_mov,
+                                category: movie.category,
+                                image: `https://via.placeholder.com/200x300?text=${encodeURIComponent(movie.movie)}` // Placeholder image
                             }));
                         })
                         .catch(error => console.error('Error fetching movies:', error));
