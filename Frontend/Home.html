@@ -18,7 +18,7 @@
 
     <h1>Movie Thumbnails</h1>
     <div id="app" class="movie-grid">
-        <a v-for="movie in movies" :key="movie.ID" :href="'movie' + movie.ID + '.html'" class="movie-card">
+        <a v-for="movie in movies" :key="movie.ID" :href="'Player.html?id=' + movie.ID" class="movie-card">
             <img :src="movie.image" :alt="movie.movie" class="movie-image">
             <div class="movie-title">{{ movie.movie }}</div>
         </a>
@@ -26,7 +26,7 @@
 
     <h1>Series Thumbnails</h1>
     <div class="series-grid">
-        <a v-for="series in seriesList" :key="series.id" :href="'series' + series.id + '.html'" class="movie-card">
+        <a v-for="series in seriesList" :key="series.id" :href="'series.html?id=' + series.id" class="movie-card">
             <img :src="series.image" :alt="series.name" class="movie-image">
             <div class="movie-title">{{ series.name }}</div>
         </a>

@@ -32,7 +32,7 @@ connection.connect(function(err) {
   app.use(express.static(path.join(__dirname, "..",  "frontend")));
 
   app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "frontend", "testiranje.html")); // Serve the HTML file
+    res.sendFile(path.join(__dirname, "..", "frontend", "")); // Serve the HTML file
 });
   
 app.get("/api/movie", (request, response) => {
