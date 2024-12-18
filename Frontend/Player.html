@@ -62,7 +62,6 @@
             el: '#app',
             data: {
                 movie: {},
-                videoUrl: 'https://www.youtube.com/embed/hJ2j4oWdQtU',
                 checkoutMessage: ''
 
             },
@@ -85,7 +84,7 @@
                 fetch(`http://localhost:3001/api/movie/${id}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Fetched movie data:', data); // Log the entire response
+                     //   console.log('Fetched movie data:', data); // Log the entire response
                         if (data.length > 0) { // Check if the array has at least one element
                             const movieData = data[0]; // Access the first movie object
                             this.movie = {
@@ -96,7 +95,7 @@
                                 description: movieData.description || 'No Description Available', // Handle undefined description
                                 video_id: movieData.video_id
                             };
-                        console.log('Movie data set:', this.movie); // Log the movie data after setting
+                       // console.log('Movie data set:', this.movie); // Log the movie data after setting
                     } else {
                         console.error('No movie found for the given ID');
                     }
