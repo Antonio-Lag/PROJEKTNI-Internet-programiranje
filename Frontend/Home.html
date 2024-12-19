@@ -82,8 +82,8 @@
                         .then(response => response.json())
                         .then(data => {
                             this.seriesList = data.map(series => ({
-                                id: series.ID,
-                                series: series.series,
+                                id: series.id,
+                                series: series.serie,
                                 producer: series.producer,
                                 year_mov: series.year_mov,
                                 category: series.category,

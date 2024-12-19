@@ -84,7 +84,13 @@ nav a:hover {
 /* Movie image styles */
 .movie-image {
     width: 200px; /* Set a fixed width */
-    height: 300px; /* Set a maximum height */
+    height: 300px; /* Set a fixed height */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+.series-image {
+    width: 200px; /* Set a fixed width */
+    height: 300px; /* Set a fixed height */
     object-fit: cover; /* Ensure the image covers the area without distortion */
 }
 
@@ -141,3 +147,5 @@ button:hover {
         font-size: 2em; /* Smaller heading on small screens */
     }
 }
+
+

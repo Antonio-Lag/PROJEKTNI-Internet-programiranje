@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const path = require("path");
+const { request } = require("http");
 
 const app = express();
 const port = 3001;
@@ -106,6 +107,45 @@ app.post("/api/register", (request, response) => {
         });
     });
 });
+
+app.get("/api/checkout", (request,response)=> {
+    connection.query("SELECT * FROM checkout", (error, results) => { // Assuming you have a Series table
+        if (error) throw error;
+        response.send(results);
+    });
+});
+
+app.post("/api/insert_checkout", (request, response) => {
+    const data=request.body;
+    const checkout=[[data.id]];
+
+    connection.query("INSERT INTO Checkout (id) VALUES ?", [checkout], (error, results) => {
+        if (error) throw error;
+        response.send(results);
+    });
+});
+
+app.post("/api/user_checkout", (request, response) => {
+    const data=request.body;
+    const checkout=[[data.username]];
+
+    connection.query("INSERT INTO Checkout (username) VALUES ?", [checkout], (error, results) => {
+        if (error) throw error;
+        response.send(results);
+    });
+});
+
+app.delete("/api/delete_checkout")
+
+
+app.delete("/api/empty_checkout", (request,response)=> {
+    connection.query("DELETE FROM checkout", (error, results) => { // Assuming you have a Series table
+        if (error) throw error;
+        response.send(results);
+    });
+});
+
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

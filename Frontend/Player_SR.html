@@ -5,17 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
     <link rel="stylesheet" href="player.css"> <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!--Link za kolica na checkout botunu-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <link rel="icon" href="faviconikona.ico" type="image/x-icon">
-
-
 
 </head>
 <body>
     <br>
     <div id="app">
-        <h1>{{ cinematography.title}}</h1>
+        <h1>{{ movie.movie }}</h1>
 
         <!-- YouTube video embedded using iframe -->
         <iframe id="videoPlayer" :src="videoUrl" frameborder="0" allowfullscreen></iframe>
@@ -25,15 +22,15 @@
             <table>
                 <tr>
                     <th>Producer</th>
-                    <td>{{ cinematography.producer}}</td>
+                    <td>{{ movie.producer }}</td>
                 </tr>
                 <tr>
                     <th>Year of Production</th>
-                    <td>{{ cinematography.year_mov }}</td>
+                    <td>{{ movie.year_mov }}</td>
                 </tr>
                 <tr>
                     <th>Genre</th>
-                    <td>{{ cinematography.category }}</td>
+                    <td>{{ movie.category }}</td>
                 </tr>
             </table>
         
@@ -41,27 +38,17 @@
         <!-- Movie description -->
         <div class="description">
             <h2>Movie Description</h2>
-            <p>{{ cinematography.description }}</p>
+            <p>{{ movie.description }}</p>
         </div>
+
         <br>
-        <br>
-        <!-- Ubaciti porzor za komentar i objavu kometara -->
-        <br>
-        <br>
+        
         <!-- Button to add item to checkout -->
         <button id="addToCheckoutButton" @click="addToCheckout">Add to Checkout</button>
-        <br>
+        
         <!-- Message display area -->
         <div id="message" style="margin-top: 10px;">{{ checkoutMessage }}</div>
-        <br>
-        <br>
-        <nav>
-            <button onclick="location.href='http://localhost:3001/Checkout.html'">
-              <i class="fas fa-shopping-cart icon"></i> <!-- Shopping kolica na botunu -->
-                 Checkout
-         </button>
-        </nav>
-        <br>
+
         <br>
         <div>
             <a href="Home.html">Back to Home</a>
@@ -76,35 +63,25 @@
         new Vue({
             el: '#app',
             data: {
-                cinematography:{},
+                movie: {},
                 checkoutMessage: ''
 
             },
             computed: {
                  videoUrl() {
-                    return this.cinematography.video_id ? `https://www.youtube.com/embed/${this.cinematography.video_id}` : '';
+                    return this.movie.video_id ? `https://www.youtube.com/embed/${this.movie.video_id}` : '';
                 }
                     
             },
             mounted() {
-                const videoId = this.getQueryParam('id');
-                this.fetchCinematographyDetails(videoId);
+                const movieId = this.getQueryParam('id');
+                this.fetchMovieDetails(movieId);
             },
             methods: {
                 getQueryParam(param) {
                     const urlParams = new URLSearchParams(window.location.search);
                     return urlParams.get(param);
                 },
-                fetchCinematographyDetails(id){
-                    if (id>100){
-                        this.fetchSeriesDetails(id);
-                    } else {
-                        this.fetchMovieDetails(id);
-
-                    }
-
-                },
-
                 fetchMovieDetails(id) {
                 fetch(`http://localhost:3001/api/movie/${id}`)
                     .then(response => response.json())
@@ -112,7 +89,7 @@
                      //   console.log('Fetched movie data:', data); // Log the entire response
                         if (data.length > 0) { // Check if the array has at least one element
                             const movieData = data[0]; // Access the first movie object
-                            this.cinematography  = {
+                            this.movie = {
                                 movie: movieData.movie,
                                 producer: movieData.producer,
                                 year_mov: movieData.year_mov,
@@ -126,37 +103,15 @@
                     }
                  })
                     .catch(error => console.error('Error fetching movie details:', error));
-                },
-                fetchSeriesDetails(id){
-                    fetch(`http://localhost:3001/api/series/${id}`)
-                    .then(response=> response.json())
-                    .then(data=>{
-                        console.log('Fetched sereis data:', data); // Log the entire response
-                        if(data.length>0){
-                            const seriesData= data[0];
-                            this.cinematography ={
-                                series: seriesData.serie,
-                                producer: seriesData.producer,
-                                year_mov: seriesData.year_mov,
-                                category: seriesData.category,
-                                description: seriesData.description || 'No Description Available', // Handle undefined description
-                                video_id: seriesData.video_id
-
-                            };
-                            console.log('series data set:', this.series);
-                        } else {
-                            console.errror('No series found for the given ID');
-                        }
-                    })
-
-                    .catch(error => console.error('Error Fetching series details', error));
-
-                },
+                }
+                ,
                 addToCheckout() {
                     this.checkoutMessage = "Item successfully added to checkout, you may proceed back to HomePage";
                 }
             }
         });
+
+
     </script>
 </body>
 </html>
