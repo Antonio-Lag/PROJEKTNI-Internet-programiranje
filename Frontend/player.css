@@ -24,7 +24,6 @@ h1 {
 }
 
 iframe {
-    
     min-width: 1280px; /* minimum width */
     min-height: 720px; /* Set height */
     border: none; /* Remove default border */
@@ -52,8 +51,6 @@ table {
     color: #ffffff; /* Text color */
     border-radius: 8px; /* Rounded corners */
     overflow: hidden; /* Hide overflow */
-
-
 }
 
 th, td {
@@ -79,6 +76,13 @@ tr:hover {
     width: 80%; /* Width of the description */
 }
 
+/* Button styles */
+.button-container {
+    display: flex; /* Flexbox for button alignment */
+    gap: 20px; /* Space between buttons */
+    margin-top: 20px; /* Space above the button container */
+}
+
 button {
     background: #007bff; /* Primary button color */
     color: #fff; /* White text */
@@ -88,4 +92,14 @@ button {
     cursor: pointer; /* Pointer cursor */
     transition: background 0.3s; /* Smooth transition */
     font-size: 1em; /* Font size */
+    display: flex; /* Flexbox for icon and text alignment */
+    align-items: center; /* Center items vertically */
+}
+
+button:hover {
+    background: #0056b3; /* Darker shade on hover */
+}
+
+i {
+    margin-right: 5px; /* Space between icon and text */
 }

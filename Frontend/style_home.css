@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%; /* Full height */
+    margin: 0; /* Remove default margin */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
 body {
     font-family: 'Arial', sans-serif; /* Clean sans-serif font */
     background-color: #000000; /* Light background color */
@@ -40,14 +46,16 @@ nav a:hover {
 /* Scrollable container styles */
 .movie-grid, .series-grid {
     display: flex; /* Use flexbox for horizontal layout */
-    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 400px; /* Set a maximum height for the grids */
     padding: 10px 0; /* Padding for the container */
     gap: 20px; /* Space between items */
-    scroll-snap-type: x mandatory; /* Enable snap scrolling */
+    scroll-snap-type: y mandatory; /* Enable snap scrolling vertically */
 }
 
+/* Scrollbar styles */
 .movie-grid::-webkit-scrollbar, .series-grid::-webkit-scrollbar {
-    height: 8px; /* Height of the scrollbar */
+    width: 8px; /* Width of the scrollbar */
 }
 
 .movie-grid::-webkit-scrollbar-thumb, .series-grid::-webkit-scrollbar-thumb {
@@ -66,7 +74,6 @@ nav a:hover {
     flex: 0 0 auto; /* Prevent flex items from shrinking */
     scroll-snap-align: start; /* Snap alignment for scrolling */
     width: 200px;
-
 }
 
 .movie-card:hover {
@@ -93,6 +100,39 @@ nav a:hover {
     white-space: normal; /* Allow text to wrap to the next line */
     overflow: hidden; /* Hide any overflow */
     text-overflow: ellipsis; /* Optional: add ellipsis for overflowed text */
+}
+
+.series-title {
+    padding: 10px; /* Padding inside the card */
+    text-align: center; /* Center the text */
+    font-size: 1.1em; /* Font size for titles */
+    color: #ffffff; /* Dark text color */
+    background-color: #62006d9d; /* Light background for title */
+    border-top: 1px solid #62006d9d; /* Top border */
+    width: 100%; /* Ensure the title takes the full width of the card */
+    white-space: normal; /* Allow text to wrap to the next line */
+    overflow: hidden; /* Hide any overflow */
+    text-overflow: ellipsis; /* Optional: add ellipsis for overflowed text */
+}
+
+button {
+    background: #007bff; /* Primary button color */
+    color: #fff; /* White text */
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    transition: background 0.3s; /* Smooth transition */
+    font-size: 1em; /* Font size */
+    margin-top: 20px; /* Space above the button */
+}
+
+button:hover {
+    background: #0056b3; /* Darker blue on hover */
+}
+
+.icon {
+    margin-right: 8px; /* Space between icon and text */
 }
 
 /* Responsive styles */
