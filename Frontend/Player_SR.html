@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
-    <link rel="stylesheet" href="player.css"> <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="player.css"> 
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <link rel="icon" href="faviconikona.ico" type="image/x-icon">
 
@@ -14,10 +14,8 @@
     <div id="app">
         <h1>{{ movie.movie }}</h1>
 
-        <!-- YouTube video embedded using iframe -->
         <iframe id="videoPlayer" :src="videoUrl" frameborder="0" allowfullscreen></iframe>
         
-        <!-- Movie details table -->
         
             <table>
                 <tr>
@@ -35,7 +33,6 @@
             </table>
         
 
-        <!-- Movie description -->
         <div class="description">
             <h2>Movie Description</h2>
             <p>{{ movie.description }}</p>
@@ -43,10 +40,8 @@
 
         <br>
         
-        <!-- Button to add item to checkout -->
         <button id="addToCheckoutButton" @click="addToCheckout">Add to Checkout</button>
         
-        <!-- Message display area -->
         <div id="message" style="margin-top: 10px;">{{ checkoutMessage }}</div>
 
         <br>
@@ -86,18 +81,18 @@
                 fetch(`http://localhost:3001/api/movie/${id}`)
                     .then(response => response.json())
                     .then(data => {
-                     //   console.log('Fetched movie data:', data); // Log the entire response
-                        if (data.length > 0) { // Check if the array has at least one element
-                            const movieData = data[0]; // Access the first movie object
+                     //   console.log('Fetched movie data:', data); // log provjera unosa
+                        if (data.length > 0) { 
+                            const movieData = data[0]; 
                             this.movie = {
                                 movie: movieData.movie,
                                 producer: movieData.producer,
                                 year_mov: movieData.year_mov,
                                 category: movieData.category,
-                                description: movieData.description || 'No Description Available', // Handle undefined description
+                                description: movieData.description || 'No Description Available', 
                                 video_id: movieData.video_id
                             };
-                       // console.log('Movie data set:', this.movie); // Log the movie data after setting
+                       // console.log('Movie data set:', this.movie); // log podatake nakon unosa
                     } else {
                         console.error('No movie found for the given ID');
                     }

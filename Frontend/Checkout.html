@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-    <link rel="stylesheet" href="checkout.css"> <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="checkout.css"> 
     <link rel="icon" href="faviconikona.ico" type="image/x-icon">
 
 </head>
@@ -69,7 +69,7 @@
     </footer>
 
     <script>
-        // Show/hide PayPal email input based on selected payment method
+        // pokaži paypal mail unos ako je paypal flag označen
         const cardRadio = document.getElementById('card');
         const paypalRadio = document.getElementById('paypal');
         const paypalEmailInput = document.getElementById('paypalEmail');
@@ -86,8 +86,7 @@
             }
         });
 
-        function submitPayment() {
-            // Here you can add your payment submission logic
+        function submitPayment() { //Maknuti alert u nešto drugo
             if (cardRadio.checked) {
                 const cardNumber = document.querySelector('input[placeholder="Enter your card number"]').value;
                 alert('Your order has been charged to: ' + cardNumber);
@@ -100,9 +99,9 @@
         }
 
         function deleteMovie(button) {
-            // Remove the row of the clicked delete button
-            const row = button.parentNode.parentNode; // Get the row of the button
-            row.parentNode.removeChild(row); // Remove the row from the table
+            // Makni red sa fillmom
+            const row = button.parentNode.parentNode; 
+            row.parentNode.removeChild(row);
         }
     </script>
 </body>

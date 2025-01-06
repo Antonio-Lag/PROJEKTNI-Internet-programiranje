@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
-    <link rel="stylesheet" href="player.css"> <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!--Link za kolica na checkout botunu-->
+    <link rel="stylesheet" href="player.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <link rel="icon" href="faviconikona.ico" type="image/x-icon">
 
@@ -17,10 +17,10 @@
     <div id="app">
         <h1>{{ cinematography.title}}</h1>
 
-        <!-- YouTube video embedded using iframe -->
+    
         <iframe id="videoPlayer" :src="videoUrl" frameborder="0" allowfullscreen></iframe>
         
-        <!-- Movie details table -->
+        
         <div class="content">
             <table>
                 <tr>
@@ -39,7 +39,7 @@
         </div>
         
 
-        <!-- Movie description -->
+      
         <div class="description">
             <h2>Movie Description</h2>
             <br>
@@ -47,13 +47,11 @@
         </div>
         <br>
         <br>
-        <!-- Ubaciti porzor za komentar i objavu kometara -->
+         <!-- Ubaciti porzor za komentar i objavu kometara -->
         <br>
         <br>
-        <!-- Button to add item to checkout -->
         <button id="addToCheckoutButton" @click="addToCheckout">Add to Checkout</button>
         <br>
-        <!-- Message display area -->
         <div id="message" style="margin-top: 10px;">{{ checkoutMessage }}</div>
         <br>
         <br>
@@ -111,18 +109,18 @@
                 fetch(`http://localhost:3001/api/movie/${id}`)
                     .then(response => response.json())
                     .then(data => {
-                     //   console.log('Fetched movie data:', data); // Log the entire response
-                        if (data.length > 0) { // Check if the array has at least one element
-                            const movieData = data[0]; // Access the first movie object
+                     //   console.log('Fetched movie data:', data); // log unos filma provjera
+                        if (data.length > 0) { t
+                            const movieData = data[0];
                             this.cinematography  = {
                                 movie: movieData.movie,
                                 producer: movieData.producer,
                                 year_mov: movieData.year_mov,
                                 category: movieData.category,
-                                description: movieData.description_mov || 'No Description Available', // Handle undefined description
+                                description: movieData.description_mov || 'No Description Available', 
                                 video_id: movieData.video_id
                             };
-                       // console.log('Movie data set:', this.movie); // Log the movie data after setting
+                       // console.log('Movie data set:', this.movie); //log filma nakon unosa u bazu
                     } else {
                         console.error('No movie found for the given ID');
                     }
@@ -133,7 +131,7 @@
                     fetch(`http://localhost:3001/api/series/${id}`)
                     .then(response=> response.json())
                     .then(data=>{
-                        console.log('Fetched sereis data:', data); // Log the entire response
+                        // console.log('Fetched sereis data:', data); // Log unos serije provjera
                         if(data.length>0){
                             const seriesData= data[0];
                             this.cinematography ={
@@ -141,7 +139,7 @@
                                 producer: seriesData.producer,
                                 year_mov: seriesData.year_mov,
                                 category: seriesData.category,
-                                description: seriesData.description || 'No Description Available', // Handle undefined description
+                                description: seriesData.description || 'No Description Available', 
                                 video_id: seriesData.video_id
 
                             };
