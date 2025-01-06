@@ -8,10 +8,8 @@ const { request } = require("http");
 const app = express();
 const port = 3001;
 
-// Parser for JSON data
 app.use(bodyParser.json());
 
-// Parser for form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -25,10 +23,10 @@ connection.connect(function(err) {
 app.use(express.static(path.join(__dirname, "..", "frontend")));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "frontend", "")); // Serve the HTML file
+    res.sendFile(path.join(__dirname, "..", "frontend", "")); 
 });
 
-// Endpoint to fetch movies
+
 app.get("/api/movie", (request, response) => {
     connection.query("SELECT * FROM Movies", (error, results) => {
         if (error) throw error;
@@ -36,7 +34,6 @@ app.get("/api/movie", (request, response) => {
     });
 });
 
-// Endpoint to fetch a specific movie by ID
 app.get("/api/movie/:id", (request, response) => {
     const id = request.params.id;
     connection.query("SELECT * FROM Movies WHERE id = ?", id, (error, results) => {
@@ -45,9 +42,8 @@ app.get("/api/movie/:id", (request, response) => {
     });
 });
 
-// Endpoint to fetch series
 app.get("/api/series", (request, response) => {
-    connection.query("SELECT * FROM Series", (error, results) => { // Assuming you have a Series table
+    connection.query("SELECT * FROM Series", (error, results) => { 
         if (error) throw error;
         response.send(results);
     });
@@ -61,7 +57,6 @@ app.get("/api/series/:id", (request, response) => {
   });
 });
 
-// Endpoint to insert a reservation
 app.post("/api/reser", (request, response) => {
     const data = request.body;
     const rezervacija = [[data.date, data.id_movie, data.user]];
@@ -72,7 +67,6 @@ app.post("/api/reser", (request, response) => {
     });
 });
 
-// Endpoint to insert a new movie
 app.post("/api/insert_movie", (request, response) => {
     const data = request.body;
     const newmovie = [[data.movie, data.producer, data.year, data.category, data.image, data.video_id, data.description]];
@@ -80,17 +74,15 @@ app.post("/api/insert_movie", (request, response) => {
     connection.query("INSERT INTO Movies (movie, producer, year_mov, category, image, video_id, description) VALUES ?", [newmovie], (error, results) => {
         console.log('Received movie data:', request.body);
         if (error) {
-          console.error('Error during insertion:', error); // Add this line for detailed error logging
-          response.status(500).send('Error inserting movie'); // Send a response indicating an error
-          return; // Exit the function to prevent further execution
+          console.error('Error during insertion:', error); 
+          response.status(500).send('Error inserting movie'); 
+          return; 
       }
-        //if (error) throw error;
-        console.log('Insertion results:', results); // Add this line
+        console.log('Insertion results:', results); 
         response.send(results);
     });
 });
 
-// Endpoint to register a new user
 app.post("/api/register", (request, response) => {
     const data = request.body;
     const registration = [[data.name, data.surname, data.username, data.password]];
@@ -110,7 +102,7 @@ app.post("/api/register", (request, response) => {
 });
 
 app.get("/api/checkout", (request,response)=> {
-    connection.query("SELECT * FROM Checkout", (error, results) => { // Assuming you have a Series table
+    connection.query("SELECT * FROM Checkout", (error, results) => { 
         if (error) throw error;
         response.send(results);
     });
@@ -140,7 +132,7 @@ app.delete("/api/delete_checkout")
 
 
 app.delete("/api/empty_checkout", (request,response)=> {
-    connection.query("DELETE FROM Checkout", (error, results) => { // Assuming you have a Series table
+    connection.query("DELETE FROM Checkout", (error, results) => { 
         if (error) throw error;
         response.send(results);
     });

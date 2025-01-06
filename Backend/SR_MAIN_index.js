@@ -8,10 +8,8 @@ const { register } = require("module");
 const app = express();
 const port = 3001;
 
-// Parser za JSON podatke
 app.use(bodyParser.json());
 
-// Parser za podatke iz formi
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const connection = mysql.createConnection({
@@ -32,7 +30,7 @@ connection.connect(function(err) {
   app.use(express.static(path.join(__dirname, "..",  "frontend")));
 
   app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "frontend", "")); // Serve the HTML file
+    res.sendFile(path.join(__dirname, "..", "frontend", "")); 
 });
   
 app.get("/api/movie", (request, response) => {
@@ -45,7 +43,7 @@ app.get("/api/movie", (request, response) => {
 
 app.get("/api/movie/:id", (request, response) => {
     const id = request.params.id;
-    connection.query("SELECT * FROM Movies WHERE id = ?", id, (error, results) => { //from ime tablice
+    connection.query("SELECT * FROM Movies WHERE id = ?", id, (error, results) => { 
         if (error) throw error;
         response.send(results);
       });

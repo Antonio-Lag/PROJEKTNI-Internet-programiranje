@@ -1,35 +1,31 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    width: 100%;
-}
-
-.table-container {
-    overflow-x: auto; /* horizontalno skrolanje */
-    margin-bottom: 20px; /* prostor ispod tablice*/
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    overflow-x: auto; /* horizontalno skrolanje za tablciu */
-
+    margin-bottom: 20px;
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 2px solid #ddd; /* Increased border thickness */
     padding: 8px;
     text-align: left;
-    
 }
-
 
 th {
     background-color: #f2f2f2;
+    font-weight: bold; /* Make header text bold */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Zebra striping for better readability */
 }
 
 button {
-    background-color: #f44336; 
+    background-color: #f44336; /* Red */
     color: white;
     border: none;
     padding: 5px 10px;

@@ -1,4 +1,3 @@
-/* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,146 +5,137 @@
 }
 
 html, body {
-    height: 100%; /* Full height */
-    margin: 0; /* Remove default margin */
-    overflow-y: auto; /* Enable vertical scrolling */
+    height: 100%; 
+    margin: 0; 
+    overflow-y: auto; /* vertikalni skrol */
 }
 
 body {
-    font-family: 'Arial', sans-serif; /* Clean sans-serif font */
-    background-color: #000000; /* Light background color */
-    color: #333; /* Dark text color */
-    padding: 20px; /* Add some padding */
+    font-family: 'Arial', sans-serif; 
+    background-color: #000000; 
+    color: #333; 
+    padding: 20px;
 }
 
-/* Main heading styles */
 h1 {
-    text-align: center; /* Center the heading */
-    margin: 20px 0; /* Space above and below */
-    font-size: 2.5em; /* Large heading */
-    color: #007bff; /* Primary color */
+    text-align: center; 
+    margin: 20px 0; 
+    font-size: 2.5em; 
+    color: #007bff;
 }
 
 h2 {
-    font-size: 1em; /* Large heading */
-    text-align: right; /* Center the heading */
-    margin: 20px 0; /* Space above and below */
+    font-size: 1em; 
+    text-align: right; 
+    margin: 20px 0;
 }
 
 nav a {
-    color: white; /* White text for links */
-    text-decoration: none; /* Remove underline */
-    margin: 0 15px; /* Space between links */
-    font-weight: bold; /* Bold text */
+    color: white;
+    text-decoration: none; 
+    margin: 0 15px; 
+    font-weight: bold; 
 }
 
 nav a:hover {
-    text-decoration: underline; /* Underline on hover */
+    text-decoration: underline; 
 }
 
-/* Scrollable container styles */
 .movie-grid, .series-grid {
-    display: flex; /* Use flexbox for horizontal layout */
-    overflow-y: auto; /* Enable vertical scrolling */
-    max-height: 400px; /* Set a maximum height for the grids */
-    padding: 10px 0; /* Padding for the container */
-    gap: 20px; /* Space between items */
-    scroll-snap-type: y mandatory; /* Enable snap scrolling vertically */
+    display: flex; 
+    overflow-y: auto; 
+    max-height: 400px; 
+    padding: 10px 0; 
+    gap: 20px; 
+    scroll-snap-type: y mandatory; 
 }
 
-/* Scrollbar styles */
 .movie-grid::-webkit-scrollbar, .series-grid::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
+    width: 8px; /* širina scrollbara */
 }
 
 .movie-grid::-webkit-scrollbar-thumb, .series-grid::-webkit-scrollbar-thumb {
-    background: #007bff; /* Color of the scrollbar thumb */
-    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+    background: #007bff; 
+    border-radius: 10px; 
 }
 
-/* Movie card styles */
 .movie-card {
-    background: #62006d9d; /* White background for cards */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    overflow: hidden; /* Hide overflow */
-    text-decoration: none; /* Remove underline */
-    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
-    flex: 0 0 auto; /* Prevent flex items from shrinking */
-    scroll-snap-align: start; /* Snap alignment for scrolling */
+    background: #62006d9d; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    overflow: hidden; 
+    text-decoration: none; 
+    transition: transform 0.3s, box-shadow 0.3s; 
+    flex: 0 0 auto; /* ograničava veličinu kartice */
+    scroll-snap-align: start; /* skrol počinje od početka */
     width: 200px;
 }
 
 .movie-card:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+    transform: translateY(-5px); /* lift efekt */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
 }
 
-/* Movie image styles */
 .movie-image {
-    width: 200px; /* Set a fixed width */
-    height: 300px; /* Set a fixed height */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
+    width: 200px; 
+    height: 300px; 
+    object-fit: cover; /* da bi slika izgledaala normalno bez distorzije */
 }
 
 .series-image {
-    width: 200px; /* Set a fixed width */
-    height: 300px; /* Set a fixed height */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
+    width: 200px; 
+    height: 300px; 
+    object-fit: cover; 
 }
 
-/* Movie title styles */
 .movie-title {
-    padding: 10px; /* Padding inside the card */
-    text-align: center; /* Center the text */
-    font-size: 1.1em; /* Font size for titles */
-    color: #ffffff; /* Dark text color */
-    background-color: #62006d9d; /* Light background for title */
-    border-top: 1px solid #62006d9d; /* Top border */
-    width: 100%; /* Ensure the title takes the full width of the card */
-    white-space: normal; /* Allow text to wrap to the next line */
-    overflow: hidden; /* Hide any overflow */
-    text-overflow: ellipsis; /* Optional: add ellipsis for overflowed text */
+    padding: 10px;
+    text-align: center; 
+    font-size: 1.1em; 
+    color: #ffffff; 
+    background-color: #62006d9d; 
+    border-top: 1px solid #62006d9d; 
+    width: 100%; /* naslov je preko cijele kartice */
+    white-space: normal; /* tekst ide u slijedecu liniju */
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
 .series-title {
-    padding: 10px; /* Padding inside the card */
-    text-align: center; /* Center the text */
-    font-size: 1.1em; /* Font size for titles */
-    color: #ffffff; /* Dark text color */
-    background-color: #62006d9d; /* Light background for title */
-    border-top: 1px solid #62006d9d; /* Top border */
-    width: 100%; /* Ensure the title takes the full width of the card */
-    white-space: normal; /* Allow text to wrap to the next line */
-    overflow: hidden; /* Hide any overflow */
-    text-overflow: ellipsis; /* Optional: add ellipsis for overflowed text */
+    padding: 10px;
+    text-align: center; 
+    font-size: 1.1em;
+    color: #ffffff;
+    background-color: #62006d9d; 
+    border-top: 1px solid #62006d9d; 
+    width: 100%;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 button {
-    background: #007bff; /* Primary button color */
-    color: #fff; /* White text */
-    padding: 10px 20px; /* Padding */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor */
-    transition: background 0.3s; /* Smooth transition */
-    font-size: 1em; /* Font size */
-    margin-top: 20px; /* Space above the button */
+    background: #007bff; 
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background 0.3s; 
+    font-size: 1em;
+    margin-top: 20px; 
 }
 
 button:hover {
-    background: #0056b3; /* Darker blue on hover */
+    background: #0056b3; 
 }
 
 .icon {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px; 
 }
 
-/* Responsive styles */
 @media (max-width: 600px) {
     h1 {
-        font-size: 2em; /* Smaller heading on small screens */
+        font-size: 2em; 
     }
 }
-
-

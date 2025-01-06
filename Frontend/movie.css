@@ -2,18 +2,18 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     padding: 20px;
-    display: flex; /* Use flexbox for the body */
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center items horizontally */
+    display: flex; /* display postavi na flex */
+    flex-direction: column; /* postavi elemente vertikalno */
+    align-items: center; /* centriraj horizontalno */
 }
 
 .movie-grid, .series-grid {
-    display: flex; /* Use flexbox for a row layout */
-    overflow-x: auto; /* Allow horizontal scrolling if needed */
-    gap: 20px; /* Space between movie cards */
-    justify-content: center; /* Center the items in the flex container */
-    margin-bottom: 40px; /* Space between movie and series sections */
-    max-width: 100%; /* Ensure the grid does not exceed the width of the screen */
+    display: flex; /* postavi display fleksibilan za red */
+    overflow-x: auto; /* horizontalno skrolanje */
+    gap: 20px; /* prostor među karticama */
+    justify-content: center; /* centriraj sadržaj u kontejnerima */
+    margin-bottom: 40px; /* prostor između filmova i serija */
+    max-width: 100%; /* limiter za širinu ekrana */
 }
 
 .movie-card {
@@ -22,7 +22,7 @@ body {
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
-    min-width: 200px; /* Set a minimum width for each card */
+    min-width: 200px; /* postavi minimum za svaki kontejneer */
 }
 
 .movie-card:hover {
