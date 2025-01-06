@@ -81,9 +81,9 @@ app.post("/api/reser", (request, response) => {
 // Endpoint to insert a new movie
 app.post("/api/insert_movie", (request, response) => {
     const data = request.body;
-    const newmovie = [[data.movie, data.producer, data.godina, data.category]];
+    const newmovie = [[data.movie, data.producer, data.year_mov, data.category, data.image, data.video_id, data.description_mov]];
 
-    connection.query("INSERT INTO Movies (name_mov, producer, year_mov, category) VALUES ?", [newmovie], (error, results) => {
+    connection.query("INSERT INTO Movies (movie, producer, year_mov, category, image, video_id, description_mov) VALUES ?", [newmovie], (error, results) => {
         if (error) throw error;
         response.send(results);
     });
@@ -109,7 +109,7 @@ app.post("/api/register", (request, response) => {
 });
 
 app.get("/api/checkout", (request,response)=> {
-    connection.query("SELECT * FROM checkout", (error, results) => { // Assuming you have a Series table
+    connection.query("SELECT * FROM Checkout", (error, results) => { // Assuming you have a Series table
         if (error) throw error;
         response.send(results);
     });
@@ -139,7 +139,7 @@ app.delete("/api/delete_checkout")
 
 
 app.delete("/api/empty_checkout", (request,response)=> {
-    connection.query("DELETE FROM checkout", (error, results) => { // Assuming you have a Series table
+    connection.query("DELETE FROM Checkout", (error, results) => { // Assuming you have a Series table
         if (error) throw error;
         response.send(results);
     });

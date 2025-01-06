@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+
+<div id="app">
+    <h1>Admin Dashboard</h1>
+
+    <h2>Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>User ID</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="user in users" :key="user.id">
+                <td>{{ user.name }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.password }}</td>
+                <td><button @click="deleteUser (user.id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Movies</h2>
+    <form @submit.prevent="addMovie">
+        <input type="text" v-model="newMovie.name" placeholder="Movie Name" required>
+        <input type="text" v-model="newMovie.videoId" placeholder="Video ID" required>
+        <input type="text" v-model="newMovie.image" placeholder="Image URL" required>
+        <input type="text" v-model="newMovie.category" placeholder="Category" required>
+        <input type="text" v-model="newMovie.year" placeholder="Year of Production" required>
+        <input type="text" v-model="newMovie.producer" placeholder="Producer" required>
+        <input type="text" v-model="newMovie.description" placeholder="Description" required>
+        <button type="submit">Add Movie</button>
+    </form>
+
+    <div class="table-container"> 
+        
+        <table>
+    
+            <thead>
+    
+                <tr>
+    
+                    <th>Movie ID</th>
+    
+                    <th>Movie Name</th>
+    
+                    <th>Video ID</th>
+    
+                    <th>Image</th>
+    
+                    <th>Category</th>
+    
+                    <th>Year of Production</th>
+    
+                    <th>Producer</th>
+    
+                    <th>Description</th>
+    
+                </tr>
+    
+            </thead>
+    
+            <tbody>
+    
+                <tr v-for="(movie, index) in movies" :key="index">
+    
+                    <td>{{ index + 1 }}</td>
+    
+                    <td>{{ movie.movie }}</td>
+    
+                    <td>{{ movie.video_id }}</td>
+    
+                    <td><img :src="movie.image" alt="Movie Image" width="50"></td>
+    
+                    <td>{{ movie.category }}</td>
+    
+                    <td>{{ movie.year }}</td>
+    
+                    <td>{{ movie.producer }}</td>
+    
+                    <td>{{ movie.description }}</td>
+    
+                </tr>
+    
+            </tbody>
+    
+        </table>
+    
+    </div>
+
+
+    <h2>Rented Movies</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Movie ID</th>
+                <th>Rented Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="rental in rentals" :key="rental.userId">
+                <td>{{ rental.userId }}</td>
+                <td>{{ rental.movieId }}</td>
+                <td>{{ rental.rentedDate }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        users: [],
+        movies: [],
+        rentals: [],
+        movieData:[],
+        newMovie: {
+            name: '',
+            videoId: '',
+            image: '',
+            category: '',
+            year: '',
+            producer: '',
+            description: ''
+        }
+    },
+    mounted() {
+        this.fetchMovies();
+        this.fetchUsers();
+        this.fetchRentals();
+    },
+    methods: {
+        fetchMovies() {
+            fetch('/api/movie')
+                .then(response => response.json())
+                .then(data => {
+                    this.movies = data.map(movie => ({
+                        movie: movie.movie,
+                        video_id: movie.video_id,
+                        image: movie.image,
+                        category: movie.category,
+                        year: movie.year_mov,
+                        producer: movie.producer,
+                        description: movie.description_mov
+                    }));
+                })
+                .catch(error => console.error('Error fetching movies:', error));
+        },
+        fetchUsers() {
+            // Fetch users logic here
+        },
+        fetchRentals() {
+            // Fetch rentals logic here
+        },
+
+        addMovie() 
+        {
+            const movieData = {
+                movie: this.newMovie.name,
+                video_id: this.newMovie.videoId,
+                image: this.newMovie.image,
+                category: this.newMovie.category,
+                year_mov: this.newMovie.year,
+                producer: this.newMovie.producer,
+                description_mov: this.newMovie.description
+            };
+            
+            fetch('http://localhost:3001/api/insert_movie', {
+             method: 'POST',
+
+            headers: {
+
+                'Content-Type': 'application/json'
+
+            },
+
+            body: JSON.stringify(movieData)
+
+        })
+
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+            this.newMovie = {
+
+                name: '',
+                videoId: '',
+                image: '',
+                category: '',
+                year: '',
+                producer: '',
+                description: ''
+
+            };
+
+        })
+
+        .catch(error => console.error('Error adding movie:', error));
+
+        },
+
+        
+
+
+        deleteUser (userId) {
+            // Logic to delete a user
+        }
+    }
+});
+</script>
+
+</body>
+</html>

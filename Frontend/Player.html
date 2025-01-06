@@ -21,7 +21,7 @@
         <iframe id="videoPlayer" :src="videoUrl" frameborder="0" allowfullscreen></iframe>
         
         <!-- Movie details table -->
-        
+        <div class="content">
             <table>
                 <tr>
                     <th>Producer</th>
@@ -36,6 +36,7 @@
                     <td>{{ cinematography.category }}</td>
                 </tr>
             </table>
+        </div>
         
 
         <!-- Movie description -->
@@ -117,7 +118,7 @@
                                 producer: movieData.producer,
                                 year_mov: movieData.year_mov,
                                 category: movieData.category,
-                                description: movieData.description || 'No Description Available', // Handle undefined description
+                                description: movieData.description_mov || 'No Description Available', // Handle undefined description
                                 video_id: movieData.video_id
                             };
                        // console.log('Movie data set:', this.movie); // Log the movie data after setting

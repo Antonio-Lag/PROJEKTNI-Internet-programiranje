@@ -63,9 +63,9 @@ app.post("/api/reser", (request, response) => {
 
   app.post("/api/insert_movie", (request, response) => {
     const data = request.body;
-    newmovie = [[data.movie, data.producer, data.godina, data.category]]
+    newmovie = [[data.movie, data.producer, data.year, data.category, data.image, data.video, data.description]]
 
-    connection.query("INSERT INTO Movies (name_mov, producer, year_mov, category) VALUES ?", [newmovie], (error, results) => {
+    connection.query("INSERT INTO Movies (name_mov, producer, year_mov, category, image, video_id, description) VALUES ?", [newmovie], (error, results) => {
       if (error) throw error;
       response.send(results);
     });
