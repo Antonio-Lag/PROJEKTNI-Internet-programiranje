@@ -109,8 +109,8 @@
                 fetch(`http://localhost:3001/api/movie/${id}`)
                     .then(response => response.json())
                     .then(data => {
-                     //   console.log('Fetched movie data:', data); // log unos filma provjera
-                        if (data.length > 0) { t
+                        // console.log('Fetched movie data:', data); // log unos filma provjera
+                        if (data.length > 0) { 
                             const movieData = data[0];
                             this.cinematography  = {
                                 movie: movieData.movie,
@@ -120,7 +120,7 @@
                                 description: movieData.description_mov || 'No Description Available', 
                                 video_id: movieData.video_id
                             };
-                       // console.log('Movie data set:', this.movie); //log filma nakon unosa u bazu
+                      //  console.log('Movie data set:', this.movie); //log filma nakon unosa u bazu
                     } else {
                         console.error('No movie found for the given ID');
                     }
@@ -131,7 +131,7 @@
                     fetch(`http://localhost:3001/api/series/${id}`)
                     .then(response=> response.json())
                     .then(data=>{
-                        // console.log('Fetched sereis data:', data); // Log unos serije provjera
+                       //  console.log('Fetched sereis data:', data); // Log unos serije provjera
                         if(data.length>0){
                             const seriesData= data[0];
                             this.cinematography ={

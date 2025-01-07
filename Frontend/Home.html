@@ -24,6 +24,8 @@
         </nav>
     </h2>
 
+    <!-- Ako je stisnut gumb filtriraj nemoj napraviti fetch movie api, nego napravi fetch filter api; else fetch movie api -->
+
     <h1>Movie Thumbnails</h1>
     <div id="app" class="movie-grid">
         <a v-for="movie in movies" :key="movie.ID" :href="'Player.html?id=' + movie.ID" class="movie-card">

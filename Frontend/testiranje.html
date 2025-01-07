@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Thumbnails</title>
+    <link rel="stylesheet" href="style_home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link rel="icon" href="faviconikona.ico" type="image/x-icon">
+</head>
+<body>
+
+    <h2>
+        <nav>
+            <button onclick="location.href='http://localhost:3001/Login.html'">Login</button>
+            <button onclick="location.href='http://localhost:3001/Register.html'">Register</button>
+            <button onclick="location.href='http://localhost:3001/Checkout.html'">
+                <i class="fas fa-shopping-cart icon"></i>
+                Checkout
+            </button>
+        </nav>
+    </h2>
+
+    <h1>Movie Thumbnails</h1>
+
+    <div id="app">
+        <label for="category-select">Filter by Category:</label>
+        <select id="category-select" v-model="selectedCategory" @change="filterMovies">
+            <option value="">All Categories</option>
+            <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
+        </select>
+
+        <div class="movie-grid">
+            <a v-for="movie in filteredMovies" :key="movie.ID" :href="'Player.html?id=' + movie.ID" class="movie-card">
+                <img :src="movie.image" :alt="movie.movie" class="movie-image">
+                <div class="movie-title">{{ movie.movie }}</div>
+            </a>
+        </div>
+    </div>
+
+    <h1>Series Thumbnails</h1>
+    <div id="series-app">
+        <label for="series-category-select">Filter by Series Category:</label>
+        <select id="series-category-select" v-model="selectedSeriesCategory" @change="filterSeries">
+            <option value="">All Categories</option>
+            <option v-for="category in seriesCategories" :key="category" :value="category">{{ category }}</option>
+        </select>
+
+        <div class="series-grid">
+            <a v-for="series in filteredSeries" :key="series.id" :href="'Player.html?id=' + series.id" class="movie-card">
+                <img :src="series.image" :alt="series.series" class="series-image">
+                <div class="series-title">{{ series.series }}</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                movies: [],
+                filteredMovies: [],
+                categories: [],
+                selectedCategory: ''
+            },
+            mounted() {
+                this.fetchMovies();
+                this.fetchCategories();
+            },
+            methods: {
+                fetchMovies() {
+                    fetch('http://localhost:3001/api/movie')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.movies = data.map(movie => ({
+                                ID: movie.ID,
+                                movie: movie.movie,
+                                producer: movie.producer,
+                                year_mov: movie.year_mov,
+                                category: movie.category,
+                                image: movie.image 
+                            }));
+                            this.filteredMovies = this.movies;
+                        })
+                        .catch(error => console.error('Error fetching movies:', error));
+                },
+                fetchCategories() {
+                    fetch('http://localhost:3001/api/categories')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.categories = data;
+                        })
+                        .catch(error => console.error('Error fetching categories:', error));
+                },
+                filterMovies() {
+                    if (this.selectedCategory) {
+                        this.filteredMovies = this.movies.filter(movie => movie.category === this.selectedCategory);
+                    } else {
+                        this.filteredMovies = this.movies;
+                    }
+                }
+            }
+        });
+
+        new Vue({
+            el: '#series-app',
+            data: {
+                seriesList: [],
+                filteredSeries: [],
+                seriesCategories: [],
+                selectedSeriesCategory: ''
+            },
+            mounted() {
+                this.fetchSeries();
+                this.fetchSeriesCategories();
+            },
+            methods: {
+                fetchSeries() {
+                    fetch('http://localhost:3001/api/series') 
+                        .then(response => response.json())
+                        .then(data => {
+                            this.seriesList = data.map(series => ({
+                                id: series.id,
+                                series: series.series,
+                                year_mov: series.year_mov,
+                                category: series.category,
+                                image: series.image 
+                            }));
+                            this.filteredSeries = this.seriesList; // Initialize filteredSeries
+                        })
+                        .catch(error => console.error('Error fetching series:', error));
+                },
+                fetchSeriesCategories() {
+                    fetch('http://localhost:3001/api/categoriess') // Adjust this endpoint as necessary
+                        .then(response => response.json())
+                        .then(data => {
+                            this.seriesCategories = data; // Assuming data is an array of series category names
+                        })
+                        .catch(error => console.error('Error fetching series categories:', error));
+                },
+                filterSeries() {
+                    if (this.selectedSeriesCategory) {
+                        this.filteredSeries = this.seriesList.filter(series => series.category === this.selectedSeriesCategory);
+                    } else {
+                        this.filteredSeries = this.seriesList; // Show all series if no category is selected
+                    }
+                }
+            }
+        });
+    </script>
+</body> 
+</html>

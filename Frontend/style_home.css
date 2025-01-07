@@ -7,14 +7,15 @@
 html, body {
     height: 100%; 
     margin: 0; 
-    overflow-y: auto; /* vertikalni skrol */
+    overflow-y: auto; 
 }
 
 body {
     font-family: 'Arial', sans-serif; 
     background-color: #000000; 
-    color: #333; 
+    color: #15e0ff; 
     padding: 20px;
+    font-size: 18px;
 }
 
 h1 {
@@ -51,7 +52,7 @@ nav a:hover {
 }
 
 .movie-grid::-webkit-scrollbar, .series-grid::-webkit-scrollbar {
-    width: 8px; /* širina scrollbara */
+    width: 8px; 
 }
 
 .movie-grid::-webkit-scrollbar-thumb, .series-grid::-webkit-scrollbar-thumb {
@@ -66,20 +67,20 @@ nav a:hover {
     overflow: hidden; 
     text-decoration: none; 
     transition: transform 0.3s, box-shadow 0.3s; 
-    flex: 0 0 auto; /* ograničava veličinu kartice */
-    scroll-snap-align: start; /* skrol počinje od početka */
+    flex: 0 0 auto; 
+    scroll-snap-align: start; 
     width: 200px;
 }
 
 .movie-card:hover {
-    transform: translateY(-5px); /* lift efekt */
+    transform: translateY(-5px); 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
 }
 
 .movie-image {
     width: 200px; 
     height: 300px; 
-    object-fit: cover; /* da bi slika izgledaala normalno bez distorzije */
+    object-fit: cover; 
 }
 
 .series-image {
@@ -95,8 +96,8 @@ nav a:hover {
     color: #ffffff; 
     background-color: #62006d9d; 
     border-top: 1px solid #62006d9d; 
-    width: 100%; /* naslov je preko cijele kartice */
-    white-space: normal; /* tekst ide u slijedecu liniju */
+    width: 100%; 
+    white-space: normal; 
     overflow: hidden; 
     text-overflow: ellipsis; 
 }
@@ -132,6 +133,60 @@ button:hover {
 
 .icon {
     margin-right: 8px; 
+}
+
+#category-select {
+    width: 200px; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: #fff; 
+    font-size: 16px; 
+    color: #333; 
+    cursor: pointer; 
+    transition: border-color 0.3s; 
+}
+
+#category-select:focus {
+    border-color: #007bff; 
+    outline: none; 
+}
+
+#category-select option {
+    padding: 10px; 
+    background-color: #fff; 
+    color: #333; 
+}
+
+#category-select option:hover {
+    background-color: #f1f1f1; 
+}
+
+#series-category-select {
+    width: 200px; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: #fff; 
+    font-size: 16px; 
+    color: #333; 
+    cursor: pointer; 
+    transition: border-color 0.3s; 
+}
+
+#series-category-select:focus {
+    border-color: #007bff; 
+    outline: none; 
+}
+
+#series-category-select option {
+    padding: 10px; 
+    background-color: #fff; 
+    color: #333; 
+}
+
+#series-category-select option:hover {
+    background-color: #f1f1f1; 
 }
 
 @media (max-width: 600px) {

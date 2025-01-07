@@ -62,6 +62,11 @@ app.get("/api/series/:id", (request, response) => {
   });
 });
 
+//select * from movies where category = ?, [search]
+// to napraviti kao padjući meni
+
+
+// maknuti reservations
 app.post("/api/reser", (request, response) => {
     const data = request.body;
     const rezervacija = [[data.date, data.id_movie, data.user]];

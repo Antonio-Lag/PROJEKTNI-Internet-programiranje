@@ -12,6 +12,12 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const connection = mysql.createConnection({
+    host: 'ucka.veleri.hr',
+    user: 'alagundzija',
+    password: '11',
+    database: 'alagundzija'
+});
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -26,12 +32,51 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "frontend", "")); 
 });
 
+// Fetch all movies with optional category filtering
 
 app.get("/api/movie", (request, response) => {
-    connection.query("SELECT * FROM Movies", (error, results) => {
+
+    const category = request.query.category; // Get the category from query parameters
+
+    let query = "SELECT * FROM Movies";
+
+    let queryParams = [];
+
+
+    if (category) {
+
+        query += " WHERE category = ?";
+
+        queryParams.push(category);
+
+    }
+
+
+    connection.query(query, queryParams, (error, results) => {
+
         if (error) throw error;
+
         response.send(results);
+
     });
+
+});
+
+
+// Fetch all categories (assuming you have a categories table)
+
+app.get("/api/categories", (request, response) => {
+
+    connection.query("SELECT DISTINCT category FROM Movies  ORDER BY category ASC", (error, results) => {
+
+        if (error) throw error;
+
+        const categories = results.map(row => row.category);
+
+        response.send(categories);
+
+    });
+
 });
 
 app.get("/api/movie/:id", (request, response) => {
@@ -42,12 +87,59 @@ app.get("/api/movie/:id", (request, response) => {
     });
 });
 
+// Fetch all movies with optional category filtering
+
 app.get("/api/series", (request, response) => {
-    connection.query("SELECT * FROM Series", (error, results) => { 
+
+    const category = request.query.category; // Get the category from query parameters
+
+    let query = "SELECT * FROM Series";
+
+    let queryParams = [];
+
+
+    if (category) {
+
+        query += " WHERE category = ?";
+
+        queryParams.push(category);
+
+    }
+
+
+    connection.query(query, queryParams, (error, results) => {
+
         if (error) throw error;
+
         response.send(results);
+
     });
+
 });
+
+
+// Fetch all categories (assuming you have a categories table)
+
+app.get("/api/categoriess", (request, response) => {
+
+    connection.query("SELECT DISTINCT category FROM Series ORDER BY category ASC", (error, results) => {
+
+        if (error) throw error;
+
+        const categories = results.map(row => row.category);
+
+        response.send(categories);
+
+    });
+
+});
+
+// app.get("/api/series", (request, response) => {
+//    connection.query("SELECT * FROM Series", (error, results) => { 
+//        if (error) throw error;
+//        response.send(results);
+//    });
+//});
 
 app.get("/api/series/:id", (request, response) => {
   const id = request.params.id;
@@ -57,6 +149,11 @@ app.get("/api/series/:id", (request, response) => {
   });
 });
 
+//select * from movies where category = ?, [search]
+// to napraviti kao padjući meni
+
+
+// maknuti reservations
 app.post("/api/reser", (request, response) => {
     const data = request.body;
     const rezervacija = [[data.date, data.id_movie, data.user]];
@@ -69,16 +166,10 @@ app.post("/api/reser", (request, response) => {
 
 app.post("/api/insert_movie", (request, response) => {
     const data = request.body;
-    const newmovie = [[data.movie, data.producer, data.year, data.category, data.image, data.video_id, data.description]];
+    const newmovie = [[data.movie, data.producer, data.year_mov, data.category, data.image, data.video_id, data.description_mov]];
 
-    connection.query("INSERT INTO Movies (movie, producer, year_mov, category, image, video_id, description) VALUES ?", [newmovie], (error, results) => {
-        console.log('Received movie data:', request.body);
-        if (error) {
-          console.error('Error during insertion:', error); 
-          response.status(500).send('Error inserting movie'); 
-          return; 
-      }
-        console.log('Insertion results:', results); 
+    connection.query("INSERT INTO Movies (movie, producer, year_mov, category, image, video_id, description_mov) VALUES ?", [newmovie], (error, results) => {
+        if (error) throw error;
         response.send(results);
     });
 });
