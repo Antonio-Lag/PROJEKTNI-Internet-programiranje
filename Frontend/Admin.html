@@ -16,20 +16,20 @@
     <table>
         <thead>
             <tr>
-                <th>Name</th>
                 <th>User ID</th>
-                <th>Last Name</th>
                 <th>Username</th>
+                <th>Name</th>
+                <th>Last Name</th>
                 <th>Password</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="user in users" :key="user.id">
-                <td>{{ user.name }}</td>
                 <td>{{ user.id }}</td>
-                <td>{{ user.lastName }}</td>
                 <td>{{ user.username }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.lastName }}</td>
                 <td>{{ user.password }}</td>
                 <td><button @click="deleteUser (user.id)">Delete</button></td>
             </tr>
@@ -104,25 +104,75 @@
     
     </div>
 
+    <h2>Series</h2>
+    <form @submit.prevent="addSeries">
+        <input type="text" v-model="newSeries.name" placeholder="Series Name" required>
+        <input type="text" v-model="newSeries.videoId" placeholder="Video ID" required>
+        <input type="text" v-model="newSeries.image" placeholder="Image URL" required>
+        <input type="text" v-model="newSeries.category" placeholder="Category" required>
+        <input type="text" v-model="newSeries.year" placeholder="Year of Production" required>
+        <input type="text" v-model="newSeries.producer" placeholder="Producer" required>
+        <input type="text" v-model="newSeries.description" placeholder="Description" required>
+        <button type="submit">Add Series</button>
+    </form>
 
-    <h2>Rented Movies</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>User ID</th>
-                <th>Movie ID</th>
-                <th>Rented Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="rental in rentals" :key="rental.userId">
-                <td>{{ rental.userId }}</td>
-                <td>{{ rental.movieId }}</td>
-                <td>{{ rental.rentedDate }}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="table-container"> 
+        
+        <table>
+    
+            <thead>
+    
+                <tr>
+    
+                    <th>Series ID</th>
+    
+                    <th>Series Name</th>
+    
+                    <th>Video ID</th>
+    
+                    <th>Image</th>
+    
+                    <th>Category</th>
+    
+                    <th>Year of Production</th>
+    
+                    <th>Producer</th>
+    
+                    <th>Description</th>
+    
+                </tr>
+    
+            </thead>
+    
+            <tbody>
+    
+                <tr v-for="(serie, index) in series" :key="index">
+    
+                    <td>{{ index + 101 }}</td>
+    
+                    <td>{{ serie.serie }}</td>
+    
+                    <td>{{ serie.video_id }}</td>
+    
+                    <td><img :src="serie.image" alt="Series Image" width="50"></td>
+    
+                    <td>{{ serie.category }}</td>
+    
+                    <td>{{ serie.year }}</td>
+    
+                    <td>{{ serie.producer }}</td>
+    
+                    <td>{{ serie.description }}</td>
+    
+                </tr>
+    
+            </tbody>
+    
+        </table>
+    
+    </div>
+
+
 
 <script>
 new Vue({
@@ -130,10 +180,21 @@ new Vue({
     data: {
         users: [],
         movies: [],
+        series: [],
         rentals: [],
         movieData:[],
+        seriesData:[],
         newMovie: {
             name: '',
+            videoId: '',
+            image: '',
+            category: '',
+            year: '',
+            producer: '',
+            description: ''
+        },
+        newSeries:{
+            name:'',
             videoId: '',
             image: '',
             category: '',
@@ -144,6 +205,7 @@ new Vue({
     },
     mounted() {
         this.fetchMovies();
+        this.fetchSeries();
         this.fetchUsers();
         this.fetchRentals();
     },
@@ -165,13 +227,94 @@ new Vue({
                 .catch(error => console.error('Error fetching movies:', error));
         },
         fetchUsers() {
-            // Logika za podatke korisnika 
-        },
-        fetchRentals() {
-            //logika za podatke o rentanju filma
+            fetch('/api/users')
+            .then(response => response.json())
+            .then(data => {
+                this.users = data.map(user => ({
+                        id: user.user_id,
+                        username: user.username,
+                        name: user.name_sr,
+                        lastName: user.last_name,
+                        password: user.password
+                        }));
+                })
+                .catch(error => console.error('Error fetching users:', error));
         },
 
-            //logika za unos serija
+
+        fetchSeries() { //logika za unos serija
+            fetch('/api/series')
+                .then(response => response.json())
+                .then(data => {
+                    this.series = data.map(serie => ({
+                        serie: serie.serie,
+                        video_id: serie.video_id,
+                        image: serie.image,
+                        category: serie.category,
+                        year: serie.year_mov,
+                        producer: serie.producer,
+                        description: serie.description
+                    }));
+                })
+                .catch(error => console.error('Error fetching series:', error));
+        },
+
+            
+
+        addSeries() 
+        {
+            const seriesData = {
+                serie: this.newSeries.name,
+                video_id: this.newSeries.videoId,
+                image: this.newSeries.image,
+                category: this.newSeries.category,
+                year_mov: this.newSeries.year,
+                producer: this.newSeries.producer,
+                description: this.newSeries.description
+            };
+            
+            fetch('http://localhost:3001/api/insert_series', {
+             method: 'POST',
+
+            headers: {
+
+                'Content-Type': 'application/json'
+
+            },
+
+            body: JSON.stringify(seriesData)
+
+        })
+
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+            this.newSeries = {
+
+                name: '',
+                videoId: '',
+                image: '',
+                category: '',
+                year: '',
+                producer: '',
+                description: ''
+
+            };
+
+        })
+
+        .catch(error => console.error('Error adding series:', error));
+
+        },
+
 
         addMovie() 
         {
@@ -209,7 +352,7 @@ new Vue({
         })
 
         .then(data => {
-            this.newMovie = {
+            this.newSeries = {
 
                 name: '',
                 videoId: '',
@@ -231,7 +374,22 @@ new Vue({
 
 
         deleteUser (userId) {
-            // logika za brisanje korisnika
+            
+            fetch(`http://localhost:3001/api/delete_user/${userId}`, {
+
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                this.users = this.users.filter(user => user.id !== userId);
+            })
+            .catch(error => console.error('Error deleting user:', error));
+
 
         }
     }
