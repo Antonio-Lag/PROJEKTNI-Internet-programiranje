@@ -179,24 +179,12 @@
         });
     
     });
-    
-
-    // maknuti reservations
-    app.post("/api/reser", (request, response) => {
-        const data = request.body;
-        const rezervacija = [[data.date, data.id_movie, data.user]];
-
-        connection.query("INSERT INTO Reservation (date_reservation, movie_id, username) VALUES ?", [rezervacija], (error, results) => {
-            if (error) throw error;
-            response.send(results);
-        });
-    });
-
+     
     app.post("/api/insert_movie", (request, response) => {
         const data = request.body;
         const newmovie = [[data.movie, data.producer, data.year_mov, data.category, data.image, data.video_id, data.description_mov]];
 
-        connection.query("INSERT INTO Movies (movie, producer, year_mov, category, image, video_id, description_mov) VALUES ?", [newmovie], (error, results) => {
+        connection.query("INSERT INTO Movies (movie, producer, year_mov, category, image, video_id, description_mov, price) VALUES ?", [newmovie], (error, results) => {
             if (error) throw error;
             response.send(results);
         });
@@ -206,7 +194,7 @@
         const data = request.body;
         const newmovie = [[data.serie, data.producer, data.year_mov, data.category, data.image, data.video_id, data.description]];
 
-        connection.query("INSERT INTO Series (serie, producer, year_mov, category, image, video_id, description) VALUES ?", [newmovie], (error, results) => {
+        connection.query("INSERT INTO Series (serie, producer, year_mov, category, image, video_id, description, price) VALUES ?", [newmovie], (error, results) => {
             if (error) throw error;
             response.send(results);
         });
@@ -230,12 +218,30 @@
         });
     });
 
+
+
+
+    app.post("/api/login", (request, response) => {
+        const data = request.body;
+        
+            connection.query("SELECT * FROM Users WHERE username = ? AND password = ?", [data.username,data.password], (error, results) => {
+            if (error) throw error;
+    
+            if (results.length == 0) {
+                return response.status(400).json({ message: 'An account with that username does not exist' });
+            }
+            return response.status(200).json({ message: 'Login successful', data: { username: data.username } });
+           
+        });
+    });
+
     app.get("/api/checkout", (request,response)=> {
         connection.query("SELECT * FROM Checkout", (error, results) => { 
             if (error) throw error;
             response.send(results);
         });
     });
+
 
     app.post("/api/insert_checkout", (request, response) => {
         const data=request.body;

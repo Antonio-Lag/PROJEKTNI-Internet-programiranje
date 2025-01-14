@@ -45,6 +45,7 @@
         <input type="text" v-model="newMovie.year" placeholder="Year of Production" required>
         <input type="text" v-model="newMovie.producer" placeholder="Producer" required>
         <input type="text" v-model="newMovie.description" placeholder="Description" required>
+        <input type="text" v-model="newMovie.price" placeholder="Price" required>
         <button type="submit">Add Movie</button>
     </form>
 
@@ -71,6 +72,8 @@
                     <th>Producer</th>
     
                     <th>Description</th>
+
+                    <th>Price</th>
     
                 </tr>
     
@@ -95,6 +98,9 @@
                     <td>{{ movie.producer }}</td>
     
                     <td>{{ movie.description }}</td>
+
+                    <td>{{ movie.price }}$</td>
+    
     
                 </tr>
     
@@ -113,6 +119,7 @@
         <input type="text" v-model="newSeries.year" placeholder="Year of Production" required>
         <input type="text" v-model="newSeries.producer" placeholder="Producer" required>
         <input type="text" v-model="newSeries.description" placeholder="Description" required>
+        <input type="text" v-model="newSeries.price" placeholder="Price" required>
         <button type="submit">Add Series</button>
     </form>
 
@@ -139,6 +146,8 @@
                     <th>Producer</th>
     
                     <th>Description</th>
+
+                    <th>Price</th>
     
                 </tr>
     
@@ -163,6 +172,8 @@
                     <td>{{ serie.producer }}</td>
     
                     <td>{{ serie.description }}</td>
+
+                    <td>{{ serie.price }}$ </td>
     
                 </tr>
     
@@ -191,7 +202,8 @@ new Vue({
             category: '',
             year: '',
             producer: '',
-            description: ''
+            description: '',
+            price:''
         },
         newSeries:{
             name:'',
@@ -200,14 +212,14 @@ new Vue({
             category: '',
             year: '',
             producer: '',
-            description: ''
+            description: '',
+            price:''
         }
     },
     mounted() {
         this.fetchMovies();
         this.fetchSeries();
         this.fetchUsers();
-        this.fetchRentals();
     },
     methods: {
         fetchMovies() {
@@ -221,7 +233,8 @@ new Vue({
                         category: movie.category,
                         year: movie.year_mov,
                         producer: movie.producer,
-                        description: movie.description_mov
+                        description: movie.description_mov,
+                        price: movie.price
                     }));
                 })
                 .catch(error => console.error('Error fetching movies:', error));
@@ -235,7 +248,10 @@ new Vue({
                         username: user.username,
                         name: user.name_sr,
                         lastName: user.last_name,
-                        password: user.password
+                        password: user.password,
+                        
+                        
+
                         }));
                 })
                 .catch(error => console.error('Error fetching users:', error));
@@ -253,7 +269,8 @@ new Vue({
                         category: serie.category,
                         year: serie.year_mov,
                         producer: serie.producer,
-                        description: serie.description
+                        description: serie.description,
+                        price: serie.price
                     }));
                 })
                 .catch(error => console.error('Error fetching series:', error));
@@ -270,7 +287,8 @@ new Vue({
                 category: this.newSeries.category,
                 year_mov: this.newSeries.year,
                 producer: this.newSeries.producer,
-                description: this.newSeries.description
+                description: this.newSeries.description,
+                price: series.price
             };
             
             fetch('http://localhost:3001/api/insert_series', {
@@ -305,7 +323,8 @@ new Vue({
                 category: '',
                 year: '',
                 producer: '',
-                description: ''
+                description: '',
+                price: ''
 
             };
 
@@ -325,7 +344,8 @@ new Vue({
                 category: this.newMovie.category,
                 year_mov: this.newMovie.year,
                 producer: this.newMovie.producer,
-                description_mov: this.newMovie.description
+                description_mov: this.newMovie.description,
+                price: this.movie.price
             };
             
             fetch('http://localhost:3001/api/insert_movie', {
@@ -360,7 +380,8 @@ new Vue({
                 category: '',
                 year: '',
                 producer: '',
-                description: ''
+                description: '',
+                price:''
 
             };
 

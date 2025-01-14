@@ -34,6 +34,10 @@ h1 {
     text-align: center; /* centriranje */
     margin: 20px 0; /* margine */
 }
+h2 {
+    font-size: 1.5em; 
+    text-align: center; /* centriranje */
+}
 
 
 .w3-container {

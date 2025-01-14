@@ -4,50 +4,13 @@
 <!-- Ako se logira sa admin lozinkom i pasom redirect to admin page-->
 
 
-<script>
-
-    function provjeriUnos(){
-        console.log(document.getElementById("username").value);
-        console.log(document.getElementById("password").value);
-
-        // ukoliko nisu sva polja ispunjena, izbaci upozorenje
-
-        
-        if (document.getElementById("username").value =="") 
-            document.getElementById("username").style.backgroundColor="red";
-        if (document.getElementById("password").value =="") 
-            document.getElementById("password").style.backgroundColor="#FF494F";
-
-            if (document.getElementById("username").value =="" || document.getElementById("password").value =="" ) {
-            document.getElementById("data").innerHTML = "Please check your login information!";
-        } 
-        else {alert('Login successful')}
-
-
-    }
-
-    function Date_print(){
-            const date = new Date();
-            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-            const formattedDate = date.toLocaleDateString('en-GB', options);
-          
-            document.getElementById("current-date").innerHTML = formattedDate; 
-        }
-        window.onload = function() {
-            Date_print(); 
-        };
-
-</script>
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style_log_reg.css"></head>
     <link rel="icon" href="faviconikona.ico" type="image/x-icon">
-
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <body>
     <nav>
         <a href="Home.html">Homepage</a>
@@ -57,35 +20,137 @@
 
 
     <h1>Login</h1>
-    <div class="w3-card-4">
+    <div class="w3-container">
+        <h2>Insert Information</h2>
+      </div>
+    <div id="app" class="w3-container">
 
-        <div class="w3-container w3-green">
-          <h2>Insert Information</h2>
-        </div>
+        <label> Username:</label>
+        <input type="text" v-model="username" class="w3-input">
         
-        <form class="w3-container">
-        <label>Username</label><br>
-        <input class="w3-input" id="username" type="text">
-        <br>
-        <br>
-        <label>Password</label><br>
-        <input class="w3-input" id="password" type="password">
+        <label> Password:</label>
+        <input type="password" v-model="password" class="w3-input">
         
-        </form>
-        <div id="data" style="color:red;"></div>
-    </div>
     <br>
     <br>
-    <button class="w3-button w3-green" onclick="provjeriUnos()">Login</button>
+    <button class="w3-btn w3-blue" @click="login">Login</button>
+    <br>
+    <br>
+    <div id="data">{{ message }}</div>
 
-    <br>
     <br>
 
     <footer>Telematika 2024/25 | <span id="current-date"></span></footer>  
 
 
-     <script>
-        Date_print();
+    <script>
+
+        new Vue({
+    
+            el: '#app',
+    
+            data: {
+    
+                users: [],    
+                username: '',    
+                password: '',
+                message: ''
+    
+            },
+    
+            
+    
+            methods: {
+    
+                login() {
+    
+                    if (this.username === '' || this.password === '') {    
+                        this.message = "Please check your login information!";    
+                        return;
+                    };
+    
+    
+                    const userData = {
+                        username: this.username,
+                        password: this.password
+    
+                    };
+
+    
+                    fetch('/api/login',{
+                    method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    })
+
+                        .then(response => {response.json()})
+    
+                        .then(data => {
+    
+                              this.users = data.map(user => ({
+                                id: user.user_id,    
+                                username: user.username,    
+                                password: user.password    
+                                }));
+    
+                            })
+    
+                .then(response => {    
+                        if (!response.ok) {
+                            return response.json().then(err => { throw new Error(err.message); });    
+                        }
+                       return response.json();                
+                    })
+    
+                    .then(data => {
+                        this.message = "Login successful!";
+                        this.resetForm();
+                    })
+    
+                .catch(error => {
+                        this.message = error.message || "Login failed!";
+                    });
+                    },
+    
+    
+                resetForm() {
+    
+                this.username = '';
+    
+                this.password = '';
+    
+                }   
+    
+    
+                    
+    
+            }
+    
+        });
+    
+    
+        function Date_print(){
+    
+            const date = new Date();
+    
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    
+            const formattedDate = date.toLocaleDateString('en-GB', options);
+    
+            document.getElementById("current-date").innerHTML = formattedDate; 
+    
+        }
+    
+        
+    
+        window.onload = function() {
+    
+            Date_print(); 
+    
+        };
+    
     </script>
 
 
