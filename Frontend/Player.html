@@ -47,7 +47,6 @@
         </div>
         <br>
         <br>
-         <!-- Ubaciti porzor za komentar i objavu kometara -->
         <br>
         <br>
         <button id="addToCheckoutButton" @click="addToCheckout">Add to Checkout</button>
@@ -118,8 +117,11 @@
                                 year_mov: movieData.year_mov,
                                 category: movieData.category,
                                 description: movieData.description_mov || 'No Description Available', 
-                                video_id: movieData.video_id
+                                video_id: movieData.video_id,
+                                id:movieData.ID
+
                             };
+                            this.selectedId = movieData.ID;
                       //  console.log('Movie data set:', this.movie); //log filma nakon unosa u bazu
                     } else {
                         console.error('No movie found for the given ID');
@@ -140,10 +142,12 @@
                                 year_mov: seriesData.year_mov,
                                 category: seriesData.category,
                                 description: seriesData.description || 'No Description Available', 
-                                video_id: seriesData.video_id
+                                video_id: seriesData.video_id,
+                                id:sereisData.id
 
                             };
-                            console.log('series data set:', this.series);
+                            // console.log('series data set:', this.series);
+                            this.selectedId = seriesData.id;
                         } else {
                             console.errror('No series found for the given ID');
                         }
@@ -153,7 +157,27 @@
 
                 },
                 addToCheckout() {
+                    const isSeries = !!this.cinematography.series; 
+                    const itemId = this.selectedId;
+
+                    fetch(`/api/insert_checkout`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: itemId, isSeries  }) 
+            })
+            .then(response => {
+                if (response.ok) {
                     this.checkoutMessage = "Item successfully added to checkout, you may proceed back to HomePage";
+                } else {
+                    this.checkoutMessage = "Failed to add item to checkout. Please try again.";
+                }
+            })
+            .catch(error => {
+                console.error('Error adding item to checkout:', error);
+                this.checkoutMessage = "An error occurred. Please try again.";
+            });
                 }
             }
         });

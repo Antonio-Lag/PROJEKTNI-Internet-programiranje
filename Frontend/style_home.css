@@ -1,6 +1,4 @@
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -11,9 +9,8 @@ html, body {
 }
 
 body {
-    font-family: 'Arial', sans-serif; 
+    font-family: 'Arial', sans-serif; /* Odreživanje fonta */
     background-color: #000000; 
-    color: #15e0ff; 
     padding: 20px;
     font-size: 18px;
 }
@@ -63,7 +60,6 @@ nav a:hover {
 .movie-card {
     background: #62006d9d; 
     border-radius: 8px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     overflow: hidden; 
     text-decoration: none; 
     transition: transform 0.3s, box-shadow 0.3s; 
@@ -80,41 +76,46 @@ nav a:hover {
 .movie-image {
     width: 200px; 
     height: 300px; 
-    object-fit: cover; 
 }
 
 .series-image {
     width: 200px; 
     height: 300px; 
-    object-fit: cover; 
 }
 
 .movie-title {
-    padding: 10px;
     text-align: center; 
     font-size: 1.1em; 
     color: #ffffff; 
-    background-color: #62006d9d; 
-    border-top: 1px solid #62006d9d; 
     width: 100%; 
     white-space: normal; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+
 }
 
+
+
 .series-title {
-    padding: 10px;
     text-align: center; 
     font-size: 1.1em;
     color: #ffffff;
-    background-color: #62006d9d; 
-    border-top: 1px solid #62006d9d; 
     width: 100%;
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal; 
+
 }
 
+#app {
+    font-size: 1.1em; 
+    color: #ffffff; 
+    width: 100%; 
+    white-space: normal; 
+}
+
+#series-app {
+    font-size: 1.1em; 
+    color: #ffffff; 
+    width: 100%; 
+    white-space: normal; 
+}
 button {
     background: #007bff; 
     color: #fff; 

@@ -6,12 +6,16 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="admin.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link rel="icon" href="faviconikona.ico" type="image/x-icon">
+   
 </head>
 <body>
+<button onclick="location.href='http://localhost:3001/Login.html'">Login</button>
 
 <div id="app">
-    <h1>Admin Dashboard</h1>
-
+    
+    <h1>Admin Dashboard </h1>
+    
     <h2>Users</h2>
     <table>
         <thead>
@@ -288,10 +292,10 @@ new Vue({
                 year_mov: this.newSeries.year,
                 producer: this.newSeries.producer,
                 description: this.newSeries.description,
-                price: series.price
+                price: this.newSeries.price
             };
             
-            fetch('http://localhost:3001/api/insert_series', {
+            fetch('/api/insert_series', {
              method: 'POST',
 
             headers: {
@@ -345,10 +349,10 @@ new Vue({
                 year_mov: this.newMovie.year,
                 producer: this.newMovie.producer,
                 description_mov: this.newMovie.description,
-                price: this.movie.price
+                price: this.newMovie.price
             };
             
-            fetch('http://localhost:3001/api/insert_movie', {
+            fetch('/api/insert_movie', {
              method: 'POST',
 
             headers: {
@@ -372,7 +376,7 @@ new Vue({
         })
 
         .then(data => {
-            this.newSeries = {
+            this.newMovie = {
 
                 name: '',
                 videoId: '',
