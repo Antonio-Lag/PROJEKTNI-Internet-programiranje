@@ -228,8 +228,32 @@
     });
 
 
-    app.delete("/api/delete_checkout")
-
+    app.delete("/api/delete_checkout", (request, response) => {
+        const { movie_id, series_id } = request.body; // Expecting movie_id or series_id in the request body
+    
+        if (!movie_id && !series_id) {
+            return response.status(400).send({ message: 'Invalid ID provided' });
+        }
+    
+        let query;
+        let values;
+    
+        if (series_id) {
+            query = "DELETE FROM Checkout WHERE series_id = ?";
+            values = [series_id];
+        } else {
+            query = "DELETE FROM Checkout WHERE movie_id = ?";
+            values = [movie_id];
+        }
+    
+        connection.query(query, values, (error, results) => {
+            if (error) {
+                console.error('Error deleting from checkout:', error);
+                return response.status(500).send('Error deleting from checkout');
+            }
+            response.send(results);
+        });
+    });
 
     app.delete("/api/empty_checkout", (request,response)=> {
         connection.query("DELETE * FROM Checkout", (error, results) => { 
