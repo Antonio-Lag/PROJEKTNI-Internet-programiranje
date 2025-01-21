@@ -198,7 +198,7 @@ app.get("/api/checkout", (request,response)=> {
 app.post("/api/insert_checkout", (request, response) => {
     const data = request.body; 
     const checkoutId = data.id;
-    const isSeries = data.isSeries; // true if it's a series, false if it's a movie
+    const isSeries = data.isSeries; // ISTINA ako je serija, ako je film NOT
 
     if (checkoutId == null) {
         return response.status(400).send({ message: 'Invalid ID provided' });
@@ -209,11 +209,9 @@ app.post("/api/insert_checkout", (request, response) => {
     let query;
 
     if (isSeries) {
-        // Insert into id_series
         query = "INSERT INTO Checkout (id_series) VALUES (?)";
         values = [[checkoutId]];
     } else {
-        // Insert into id_movies
         query = "INSERT INTO Checkout (id_movies) VALUES (?)";
         values = [[checkoutId]];
     }
