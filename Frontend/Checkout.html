@@ -115,12 +115,11 @@
                 alert('Your order has been charged to: ' + paypalEmail);
                 alert('You may proceed with browsing other movies/series');
             }
-        }
-
-        fetch('/api/empty_checkout/', {
+            fetch('/api/empty_checkout/', {
                 method: 'DELETE' 
             })
             .then(response => {
+
                 if (!response.ok) {
                     throw new Error('Failed to empty checkout');
                 }
@@ -130,6 +129,9 @@
             .catch(error => {
                 console.error('Error emptying checkout:', error);
             });
+        }
+
+        
  
 
         window.onload = function() {
