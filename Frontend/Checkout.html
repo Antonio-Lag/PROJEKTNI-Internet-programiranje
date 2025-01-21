@@ -6,7 +6,6 @@
     <title>Checkout</title>
     <link rel="stylesheet" href="checkout.css"> 
     <link rel="icon" href="faviconikona.ico" type="image/x-icon">
-
 </head>
 <body>
 
@@ -18,15 +17,12 @@
             <tr>
                 <th>Title</th>
                 <th>Price</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>Movie PLACEHOLDER</td>
-                <td>Price PLACEHOLDER</td>
-                <td><button onclick="deleteMovie(this)">Delete</button></td>
             </tr>
         </table>
         <br>
+        <br>
+        <h2>Total Price</h2>
+        <div id="totalPrice">Total: $0.00</div>
         <br>
         <h2>Payment Options</h2>
         <table>
@@ -59,7 +55,7 @@
     </footer>
 
     <script>
-        // pokaži paypal mail unos ako je paypal flag označen
+        // Show PayPal email input if PayPal option is selected
         const cardRadio = document.getElementById('card');
         const paypalRadio = document.getElementById('paypal');
         const paypalEmailInput = document.getElementById('paypalEmail');
@@ -76,23 +72,69 @@
             }
         });
 
-        function submitPayment() { //Maknuti alert u nešto drugo
+        // Fetch checkout data from the API
+        function fetchCheckoutData() {
+            fetch('/api/checkout')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch checkout data');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    populateCheckoutTable(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching checkout data:', error);
+                });
+        }
+
+    
+        function populateCheckoutTable(data) {
+        let totalPrice = 0;
+        const movieTable = document.getElementById('movieTable');
+
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.title}</td>
+            <td>${item.price}</td>
+        `;
+        movieTable.appendChild(row);
+        totalPrice += item.price;
+        });
+        document.getElementById('totalPrice').innerText = 'Total: $' + totalPrice.toFixed(2);}
+
+        function submitPayment() {
             if (cardRadio.checked) {
                 const cardNumber = document.querySelector('input[placeholder="Enter your card number"]').value;
                 alert('Your order has been charged to: ' + cardNumber);
-                alert('You may proceed with browsing other movies/series')
+                alert('You may proceed with browsing other movies/series');
             } else if (paypalRadio.checked) {
                 const paypalEmail = document.querySelector('input[placeholder="Enter your PayPal email"]').value;
                 alert('Your order has been charged to: ' + paypalEmail);
-                alert('You may proceed with browsing other movies/series')
+                alert('You may proceed with browsing other movies/series');
             }
         }
 
-        function deleteMovie(button) {
-            // Makni red sa fillmom
-            const row = button.parentNode.parentNode; 
-            row.parentNode.removeChild(row);
-        }
+        fetch('/api/empty_checkout/', {
+                method: 'DELETE' 
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to empty checkout');
+                }
+                console.log('Checkout emptied successfully');
+            })
+
+            .catch(error => {
+                console.error('Error emptying checkout:', error);
+            });
+ 
+
+        window.onload = function() {
+            fetchCheckoutData();
+        };
     </script>
 </body>
 </html>

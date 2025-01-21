@@ -82,6 +82,7 @@
             computed: {
                  videoUrl() {
                     return this.cinematography.video_id ? `https://www.youtube.com/embed/${this.cinematography.video_id}` : '';
+
                 }
                     
             },
@@ -108,7 +109,7 @@
                 fetch(`http://localhost:3001/api/movie/${id}`)
                     .then(response => response.json())
                     .then(data => {
-                        // console.log('Fetched movie data:', data); // log unos filma provjera
+                        //console.log('Fetched movie data:', data); // log unos filma provjera
                         if (data.length > 0) { 
                             const movieData = data[0];
                             this.cinematography  = {
@@ -122,7 +123,7 @@
 
                             };
                             this.selectedId = movieData.ID;
-                      //  console.log('Movie data set:', this.movie); //log filma nakon unosa u bazu
+                       // console.log('Movie data set:', this.movie); //log filma nakon unosa u bazu
                     } else {
                         console.error('No movie found for the given ID');
                     }
@@ -143,13 +144,13 @@
                                 category: seriesData.category,
                                 description: seriesData.description || 'No Description Available', 
                                 video_id: seriesData.video_id,
-                                id:sereisData.id
+                                id:seriesData.id
 
                             };
                             // console.log('series data set:', this.series);
                             this.selectedId = seriesData.id;
                         } else {
-                            console.errror('No series found for the given ID');
+                            console.error('No series found for the given ID');
                         }
                     })
 
