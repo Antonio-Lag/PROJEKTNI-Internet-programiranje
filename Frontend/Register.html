@@ -94,6 +94,7 @@
                     .then(data => {
                         this.message = "Registration successful!";
                         this.resetForm();
+                        window.location.href ="Login.html";
                     })
                     .catch(error => {
                         this.message = error.message || "Registration failed!";
